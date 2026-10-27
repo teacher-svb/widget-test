@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.000 --> 00:05.000
+To add up all the scores we start with a total of zero.
+
+2
+00:05.000 --> 00:11.000
+A for of loop gives us each item in turn. We add every score to the total.
+
+3
+00:11.000 --> 00:17.000
+After the loop we log the total and the average: the total divided by the number of scores.

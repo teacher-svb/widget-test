@@ -1,0 +1,8 @@
+{
+  "title": "Add a little feedback",
+  "typing": {
+    "fromCue": 2,
+    "toCue": 4
+  },
+  "files": { "audio": "audio.mp3" }
+}

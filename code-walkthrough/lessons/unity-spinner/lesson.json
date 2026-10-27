@@ -1,0 +1,20 @@
+{
+  "title": "Unity: a spinning object",
+  "languageLabel": "C#",
+  "mode": "text/x-csharp",
+  "preview": null,
+  "lang": "en-US",
+  "tabSize": 4,
+  "cps": 15,
+  "files": {
+    "code": "Spinner.cs",
+    "audio": null,
+    "subtitles": "subtitles.vtt",
+    "explainer": "explainer.md"
+  },
+  "steps": [
+    "01-component",
+    "02-rotate",
+    "03-deltatime"
+  ]
+}

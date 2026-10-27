@@ -1,0 +1,40 @@
+{
+  "default": "chatterbox",
+  "settings": {
+    "leadIn": 0.4,
+    "gap": 0.35,
+    "tail": 0.8,
+    "trimSilence": true,
+    "loudnorm": true,
+    "lexicon": {
+      "getElementById": "get element by id",
+      "addEventListener": "add event listener",
+      "textContent": "text content",
+      "MonoBehaviour": "mono behaviour",
+      "deltaTime": "delta time",
+      "C#": "C sharp"
+    }
+  },
+  "profiles": {
+    "chatterbox": {
+      "engine": "openai",
+      "baseUrl": "http://homelab.lan:4123",
+      "voice": "syndias-nl",
+      "extra": {
+        "exaggeration": 0.4,
+        "cfg_weight": 0.5,
+        "temperature": 0.7
+      }
+    },
+    "piper": {
+      "engine": "command",
+      "command": ["piper", "--model", "/path/to/voices/nl_BE-rdh-medium.onnx", "--output_file", "{out}", "--length_scale", "{length_scale}"]
+    },
+    "qwen-en": {
+      "engine": "openai",
+      "baseUrl": "http://homelab.lan:8880",
+      "model": "qwen-tts",
+      "voice": "default"
+    }
+  }
+}

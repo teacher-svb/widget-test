@@ -1,0 +1,19 @@
+{
+  "title": "JavaScript: arrays and loops",
+  "languageLabel": "JavaScript",
+  "mode": "javascript",
+  "preview": "console",
+  "lang": "en-US",
+  "tabSize": 2,
+  "cps": 15,
+  "files": {
+    "code": "code.js",
+    "audio": null,
+    "subtitles": "subtitles.vtt",
+    "explainer": "explainer.md"
+  },
+  "steps": [
+    "01-array",
+    "02-loop"
+  ]
+}

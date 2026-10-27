@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.400 --> 00:08.070
+Nu voegen we een style-element toe aan de head. Zonder CSS ziet de pagina eruit als een document uit 1995.
+
+2
+00:08.070 --> 00:16.353
+Op de body gebruiken we CSS grid met place-items center. Dat centreert de teller zowel horizontaal als verticaal.
+
+3
+00:16.353 --> 00:22.966
+Met min-height 100vh is de body minstens even hoog als het venster, zodat er ruimte is om in te centreren.
+
+4
+00:22.966 --> 00:27.783
+Het getal krijgt een grote font-size, en display block zet het op een eigen regel.
+
+5
+00:27.783 --> 00:35.093
+Tot slot de knop: we nemen het lettertype over, voegen padding toe, halen de rand weg en geven hem afgeronde hoeken.

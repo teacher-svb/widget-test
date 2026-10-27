@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.000 --> 00:04.500
+An array is an ordered list of values, written between square brackets.
+
+2
+00:04.500 --> 00:09.000
+length tells you how many items it holds. Here that is four.
+
+3
+00:09.000 --> 00:13.000
+Items are numbered from zero, so scores zero is the first one.

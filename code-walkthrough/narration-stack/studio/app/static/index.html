@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Narration Studio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232b54cf'/%3E%3Cpath d='M7 18v-4M11 22V10M15 19v-6M19 24V8M23 20v-8' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M7 18v-4M11 22V10M15 19v-6M19 24V8M23 20v-8"/></svg>
+      <span>Narration Studio</span>
+    </div>
+    <div class="status" id="status" aria-live="polite"></div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button type="button" role="tab" data-view="narrate" aria-selected="true">Narrate</button>
+    <button type="button" role="tab" data-view="voices" aria-selected="false">Voices</button>
+    <button type="button" role="tab" data-view="piper" aria-selected="false">Piper voices</button>
+    <button type="button" role="tab" data-view="library" aria-selected="false">Library</button>
+    <button type="button" role="tab" data-view="settings" aria-selected="false">Settings</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ===================================================== Narrate -->
+  <section class="view" data-view="narrate">
+    <div class="narrate-grid">
+      <div class="card script">
+        <div class="card-head">
+          <h2>Script</h2>
+          <div class="seg" id="source-seg" role="radiogroup" aria-label="Source">
+            <button type="button" data-source="text" aria-pressed="true">Text</button>
+            <button type="button" data-source="lesson" aria-pressed="false" id="source-lesson-btn" hidden>Lesson step</button>
+          </div>
+        </div>
+
+        <div class="lesson-pick" id="lesson-pick" hidden>
+          <label class="field"><span>Lesson</span><select id="lesson-select"></select></label>
+          <label class="field"><span>Step</span><select id="step-select"></select></label>
+          <button type="button" class="btn" id="lesson-load">Load subtitles</button>
+        </div>
+
+        <label class="field"><span>Name</span>
+          <input id="out-name" type="text" placeholder="For example: Klikteller stap 2" autocomplete="off"></label>
+
+        <label class="field grow"><span>Text</span>
+          <textarea id="text" spellcheck="true" placeholder="Type or paste the narration. Every sentence becomes one subtitle and one audio clip.&#10;&#10;Use [[shown|spoken]] to show one thing and say another, for example [[count++|count plus plus]]."></textarea>
+        </label>
+
+        <div class="script-foot">
+          <div class="seg small" id="split-seg" role="radiogroup" aria-label="New subtitle at each">
+            <span class="seg-label">New subtitle at each</span>
+            <button type="button" data-split="sentence" aria-pressed="true">Sentence</button>
+            <button type="button" data-split="line" aria-pressed="false">Line</button>
+          </div>
+          <span class="count" id="cue-count">0 subtitles</span>
+        </div>
+      </div>
+
+      <div class="card voice">
+        <div class="card-head"><h2>Voice</h2></div>
+        <label class="field"><span>TTS model</span><select id="engine"></select></label>
+        <p class="hint" id="engine-desc"></p>
+        <div class="voice-row">
+          <label class="field grow"><span>Voice</span><select id="voice"></select></label>
+          <button type="button" class="btn icon-btn" id="preview-btn" title="Preview the first sentence" aria-label="Preview the first sentence">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg></button>
+        </div>
+        <p class="hint warn" id="voice-hint" hidden></p>
+        <div id="params"></div>
+        <details class="adv">
+          <summary>Pauses</summary>
+          <div class="pauses">
+            <label class="field"><span>Before first</span><input type="number" id="t-lead" min="0" max="5" step="0.05" value="0.4"><em>s</em></label>
+            <label class="field"><span>Between</span><input type="number" id="t-gap" min="0" max="5" step="0.05" value="0.35"><em>s</em></label>
+            <label class="field"><span>After last</span><input type="number" id="t-tail" min="0" max="5" step="0.05" value="0.8"><em>s</em></label>
+          </div>
+        </details>
+        <div class="actions">
+          <button type="button" class="btn primary" id="generate">Generate</button>
+          <button type="button" class="btn ghost" id="new-btn" title="Start a new output">New</button>
+        </div>
+        <p class="hint" id="generate-hint">Unchanged sentences are reused from the cache, so regenerating after an edit is quick.</p>
+      </div>
+    </div>
+
+    <div class="card result" id="result" hidden>
+      <div class="result-head">
+        <div class="result-title">
+          <h2 id="r-name"></h2>
+          <span class="pill" id="r-state"></span>
+        </div>
+        <div class="result-actions">
+          <a class="btn" id="dl-mp3" href="#">Download MP3</a>
+          <a class="btn" id="dl-vtt" href="#">Download subtitles</a>
+        </div>
+      </div>
+      <div class="progress" id="r-progress" hidden><div></div></div>
+      <p class="error-text" id="r-error" hidden></p>
+
+      <div class="wave-wrap" id="wave-wrap" hidden>
+        <canvas id="wave" aria-label="Waveform with one region per subtitle"></canvas>
+      </div>
+      <audio id="player" controls preload="auto" hidden></audio>
+
+      <div class="save-lesson" id="save-lesson" hidden>
+        <span>Save to lesson</span>
+        <select id="save-lesson-select" aria-label="Lesson"></select>
+        <select id="save-step-select" aria-label="Step"></select>
+        <button type="button" class="btn" id="save-lesson-btn">Save audio and subtitles</button>
+        <span class="hint" id="save-lesson-msg"></span>
+      </div>
+
+      <ol class="lines" id="lines"></ol>
+    </div>
+  </section>
+
+  <!-- ===================================================== Voices -->
+  <section class="view" data-view="voices" hidden>
+    <div class="voices-grid">
+      <div class="card">
+        <div class="card-head"><h2>Clone a voice</h2></div>
+        <p class="hint" id="clone-status"></p>
+        <label class="field"><span>Name</span><input id="clone-name" type="text" placeholder="syndias-nl" autocomplete="off"></label>
+        <label class="field"><span>Language</span><select id="clone-lang"></select></label>
+
+        <div class="record">
+          <div class="record-top">
+            <button type="button" class="btn rec" id="rec-btn"><span class="dot"></span><span id="rec-label">Record</span></button>
+            <span class="rec-time" id="rec-time">0:00</span>
+            <canvas class="meter" id="meter" width="240" height="28" aria-hidden="true"></canvas>
+          </div>
+          <p class="hint" id="rec-hint">Read the text below at your normal lesson pace, in a quiet room. Aim for 10 to 20 seconds.</p>
+          <blockquote class="read-me" id="read-me">In deze les bouwen we samen een kleine applicatie. Eerst schrijven we de structuur in HTML, daarna geven we alles een eigen stijl met CSS. Tot slot zorgen we met JavaScript dat de knop ook echt iets doet. Typ gerust mee, en pauzeer de les wanneer je zelf iets wil uitproberen.</blockquote>
+          <div class="or"><span>or upload a file</span></div>
+          <input type="file" id="clone-file" accept="audio/*">
+        </div>
+
+        <div class="clip-preview" id="clip-preview" hidden>
+          <audio id="clip-audio" controls></audio>
+          <span class="hint" id="clip-info"></span>
+        </div>
+        <label class="check"><input type="checkbox" id="clone-trim" checked> Trim silence at the start and end</label>
+        <div class="actions">
+          <button type="button" class="btn primary" id="clone-btn" disabled>Add voice</button>
+        </div>
+        <p class="hint" id="clone-msg"></p>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Voice library</h2>
+          <span class="hint">Chatterbox</span>
+        </div>
+        <label class="field"><span>Test sentence</span>
+          <input id="test-text" type="text" value="Hallo! In deze les leren we hoe een klikteller werkt."></label>
+        <ul class="voice-list" id="voice-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== Piper -->
+  <section class="view" data-view="piper" hidden>
+    <div class="card">
+      <div class="card-head"><h2>Installed Piper voices</h2></div>
+      <p class="hint">Piper runs on the CPU and generates a lesson in seconds. It sounds synthetic, which makes it best for drafts while you are still changing the text. It cannot clone voices.</p>
+      <ul class="voice-list" id="piper-installed"></ul>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <h2>Download voices</h2>
+        <div class="filters">
+          <select id="piper-lang" aria-label="Language"></select>
+          <input type="search" id="piper-search" placeholder="Search" aria-label="Search voices">
+        </div>
+      </div>
+      <p class="hint" id="piper-catalog-msg">Loading the voice list&hellip;</p>
+      <div class="table-wrap">
+        <table class="catalog">
+          <thead><tr><th>Voice</th><th>Language</th><th>Quality</th><th class="num">Size</th><th></th></tr></thead>
+          <tbody id="piper-catalog"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== Library -->
+  <section class="view" data-view="library" hidden>
+    <div class="card">
+      <div class="card-head"><h2>Library</h2><span class="hint" id="lib-count"></span></div>
+      <div class="table-wrap">
+        <table class="library">
+          <thead><tr><th>Name</th><th>Voice</th><th class="num">Length</th><th>Updated</th><th></th></tr></thead>
+          <tbody id="library"></tbody>
+        </table>
+      </div>
+      <p class="hint empty" id="lib-empty" hidden>Nothing generated yet. Outputs appear here after you press Generate.</p>
+    </div>
+  </section>
+
+  <!-- ===================================================== Settings -->
+  <section class="view" data-view="settings" hidden>
+    <div class="settings-grid">
+      <div class="card">
+        <div class="card-head"><h2>Pronunciation</h2></div>
+        <p class="hint">One word per line as <code>word = how to say it</code>. Applies to every model and every output. Words are matched as whole words and are case sensitive.</p>
+        <textarea id="lexicon" class="mono" spellcheck="false"></textarea>
+        <div class="actions"><button type="button" class="btn primary" id="lexicon-save">Save</button><span class="hint" id="lexicon-msg"></span></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Clip cache</h2></div>
+        <p class="hint">Every generated sentence is kept so unchanged sentences never need to be generated again. Clearing it does not remove finished MP3 files.</p>
+        <p class="stat" id="cache-stat"></p>
+        <div class="actions"><button type="button" class="btn danger" id="cache-clear">Clear cache</button></div>
+        <div class="card-head sub"><h2>Connections</h2></div>
+        <dl class="kv" id="conn"></dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

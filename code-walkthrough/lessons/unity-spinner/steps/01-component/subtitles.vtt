@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.000 --> 00:05.000
+Every script you attach to a GameObject in Unity is a class that inherits from MonoBehaviour.
+
+2
+00:05.000 --> 00:10.000
+The class name has to match the file name, so this file is called Spinner dot cs.
+
+3
+00:10.000 --> 00:14.500
+Unity calls Update once per frame. That is where our rotation will go.

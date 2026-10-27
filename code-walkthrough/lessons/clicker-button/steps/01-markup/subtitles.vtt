@@ -1,0 +1,25 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.865
+Elke webpagina begint met hetzelfde skelet:
+
+2
+00:02.865 --> 00:06.714
+een doctype, een html-element, een head en een body.
+
+3
+00:06.714 --> 00:12.351
+In de body voegen we een main-element toe. Daarin komt alles wat onze teller nodig heeft.
+
+4
+00:12.351 --> 00:17.681
+Een output-element toont het huidige getal, en met een knop kan de gebruiker het aanpassen.
+
+5
+00:17.681 --> 00:19.842
+Let op de id's op de output en de knop.
+
+6
+00:19.842 --> 00:23.623
+JavaScript gebruikt die later om deze elementen terug te vinden.

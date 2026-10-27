@@ -1,0 +1,73 @@
+# Narration stack for Dockge: Chatterbox Multilingual (GPU) + Narration Studio (web UI, Piper on CPU).
+#
+# Folder layout next to this file:
+#   compose.yaml
+#   .env                  (copy of .env.example)
+#   studio/               (Narration Studio, built locally)
+#   chatterbox-tts-api/   (git clone https://github.com/travisvn/chatterbox-tts-api.git)
+#   data/                 (created on first start: outputs, clip cache, Piper voices, settings)
+
+services:
+  chatterbox:
+    build:
+      context: ./chatterbox-tts-api
+      dockerfile: docker/Dockerfile.uv.gpu
+    container_name: narration-chatterbox
+    environment:
+      - PORT=4123
+      - HOST=0.0.0.0
+      - DEVICE=cuda
+      - USE_MULTILINGUAL_MODEL=true
+      - MODEL_CACHE_DIR=/cache
+      - VOICE_LIBRARY_DIR=/voices
+      - EXAGGERATION=${CHATTERBOX_EXAGGERATION:-0.4}
+      - CFG_WEIGHT=${CHATTERBOX_CFG_WEIGHT:-0.5}
+      - TEMPERATURE=${CHATTERBOX_TEMPERATURE:-0.7}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - chatterbox-models:/cache
+      - chatterbox-voices:/voices
+      - chatterbox-longtext:/data/long_text_jobs
+    # Published so tools/narrate.py on other machines can use Chatterbox directly.
+    # Remove the ports section to keep it reachable from the studio only.
+    ports:
+      - "${CHATTERBOX_PORT:-4123}:4123"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4123/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 300s
+
+  studio:
+    build: ./studio
+    image: ${STUDIO_IMAGE:-narration-studio:latest}
+    container_name: narration-studio
+    environment:
+      - CHATTERBOX_URL=http://chatterbox:4123
+      - DATA_DIR=/data
+      - LESSONS_DIR=/lessons
+    volumes:
+      - ./data:/data
+      # Optional: the folder that holds your Code Walkthrough lessons.
+      # The studio finds every lesson.json below it (up to four levels deep).
+      - ${LESSONS_PATH:-./lessons}:/lessons
+    ports:
+      - "${STUDIO_PORT:-8090}:8080"
+    depends_on:
+      - chatterbox
+    restart: unless-stopped
+
+volumes:
+  chatterbox-models:
+  chatterbox-voices:
+  chatterbox-longtext:

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <title>Click counter</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .counter { text-align: center; }
+    #count {
+      display: block;
+      font-size: 4rem;
+      font-weight: 700;
+    }
+    #count.pop { animation: pop 0.2s ease-out; }
+    @keyframes pop { 50% { transform: scale(1.25); } }
+    button {
+      font: inherit;
+      padding: 0.6em 1.4em;
+      border: 0;
+      border-radius: 999px;
+      background: #2b54cf;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <main class="counter">
+    <p class="label">Clicks</p>
+    <output id="count">0</output>
+    <button id="add">Click me</button>
+  </main>
+  <script>
+    const output = document.getElementById("count");
+    const button = document.getElementById("add");
+    let count = 0;
+
+    button.addEventListener("click", () => {
+      count++;
+      output.textContent = count;
+      output.classList.remove("pop");
+      void output.offsetWidth;
+      output.classList.add("pop");
+    });
+  </script>
+</body>
+</html>

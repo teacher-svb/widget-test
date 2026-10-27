@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Code Walkthrough Player</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="player/player.css">
+<style>
+  html, body { margin: 0; }
+  body {
+    background: var(--cp-bg);
+    color: var(--cp-fg);
+    font-family: var(--cp-font-body);
+  }
+  .page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-block: 20px 32px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid;
+    gap: 16px;
+  }
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px 24px;
+  }
+  .masthead h1 {
+    margin: 0;
+    font-family: var(--cp-font-display);
+    font-size: clamp(24px, 3.2vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .masthead p { margin: 4px 0 0; color: var(--cp-muted); font-size: 14px; }
+  .picker { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cp-muted); }
+  .picker select {
+    font: inherit; font-size: 14px; letter-spacing: 0; text-transform: none; font-weight: 600;
+    height: 36px; padding: 0 10px; border-radius: 8px;
+    border: 1px solid var(--cp-line); background: var(--cp-surface); color: var(--cp-fg);
+    max-width: 100%;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <div>
+      <h1 id="lesson-title">Code Walkthrough Player</h1>
+      <p id="lesson-sub">Press play to watch the code being written. Pause at any moment to edit it yourself.</p>
+    </div>
+    <label class="picker" for="lesson-select">Lesson
+      <select id="lesson-select"></select>
+    </label>
+  </header>
+  <div id="player"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="player/player.js"></script>
+<script>
+(function () {
+  var select = document.getElementById('lesson-select');
+  var title = document.getElementById('lesson-title');
+  var sub = document.getElementById('lesson-sub');
+  var root = document.getElementById('player');
+
+  function load(entry) {
+    if (root.codePlayer) root.codePlayer.pause();
+    title.textContent = entry.title;
+    if (entry.summary) sub.textContent = entry.summary;
+    var fresh = document.createElement('div');
+    fresh.id = 'player';
+    root.replaceWith(fresh);
+    root = fresh;
+    CodePlayer.mount(root, 'lessons/' + entry.id + '/');
+    try { history.replaceState(null, '', '#' + entry.id); } catch (e) { /* ignore */ }
+  }
+
+  fetch('lessons/index.json').then(function (r) { return r.json(); }).then(function (lessons) {
+    lessons.forEach(function (l) {
+      var o = document.createElement('option');
+      o.value = l.id;
+      o.textContent = l.title;
+      select.appendChild(o);
+    });
+    var wanted = location.hash.slice(1);
+    var first = lessons.filter(function (l) { return l.id === wanted; })[0] || lessons[0];
+    select.value = first.id;
+    select.addEventListener('change', function () {
+      load(lessons.filter(function (l) { return l.id === select.value; })[0]);
+    });
+    load(first);
+  }).catch(function () {
+    root.innerHTML = '<div class="cp-error"><strong>lessons/index.json could not be loaded.</strong><br>Serve this folder over HTTP, for example with <code>python3 -m http.server</code>, and open http://localhost:8000.</div>';
+  });
+})();
+</script>
+</body>
+</html>

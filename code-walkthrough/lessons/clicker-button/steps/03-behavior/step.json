@@ -1,0 +1,8 @@
+{
+  "title": "Count the clicks",
+  "typing": {
+    "fromCue": 1,
+    "toCue": 5
+  },
+  "files": { "audio": "audio.mp3" }
+}

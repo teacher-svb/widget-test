@@ -1,0 +1,17 @@
+[
+  {
+    "id": "clicker-button",
+    "title": "Build a click counter",
+    "summary": "HTML, CSS and JavaScript in four steps, with a live preview."
+  },
+  {
+    "id": "unity-spinner",
+    "title": "Unity: a spinning object",
+    "summary": "A first MonoBehaviour in C#, and why Time.deltaTime matters."
+  },
+  {
+    "id": "js-arrays",
+    "title": "JavaScript: arrays and loops",
+    "summary": "Arrays, for...of and the console, with live console output."
+  }
+]

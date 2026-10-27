@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.400 --> 00:06.505
+Tijd voor JavaScript. We zetten het script aan het einde van de body, na de elementen die het nodig heeft.
+
+2
+00:06.505 --> 00:13.293
+getElementById zoekt de output en de knop op met de id's die we in de eerste stap hebben toegevoegd.
+
+3
+00:13.293 --> 00:17.278
+De teller begint bij nul. We gebruiken let omdat de waarde zal veranderen.
+
+4
+00:17.278 --> 00:21.961
+addEventListener voert onze arrow function uit telkens wanneer er op de knop wordt geklikt.
+
+5
+00:21.961 --> 00:28.198
+Daarin verhogen we de teller en schrijven we de nieuwe waarde in de output. Klik maar eens op de knop in de preview.

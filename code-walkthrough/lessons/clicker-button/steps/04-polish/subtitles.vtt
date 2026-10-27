@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.400 --> 00:06.429
+De teller werkt, maar hij voelt nog wat vlak aan. Laten we het getal laten opspringen wanneer het verandert.
+
+2
+00:06.429 --> 00:12.954
+We definiëren een keyframe-animatie die het getal halverwege groter maakt en daarna weer terug verkleint.
+
+3
+00:12.954 --> 00:17.997
+count plus plus is een kortere manier om count is gelijk aan count plus één te schrijven.
+
+4
+00:17.997 --> 00:26.282
+Om een animatie opnieuw af te spelen, halen we de class weg, dwingen we de browser om de layout opnieuw te berekenen, en voegen we de class weer toe.
+
+5
+00:26.282 --> 00:30.714
+Dat is de volledige teller. Pauzeer nu en experimenteer zelf met de code.

@@ -1,0 +1,21 @@
+{
+  "title": "Build a click counter",
+  "languageLabel": "HTML / CSS / JS",
+  "mode": "htmlmixed",
+  "preview": "html",
+  "lang": "en-US",
+  "tabSize": 2,
+  "cps": 16,
+  "files": {
+    "code": "code.html",
+    "audio": null,
+    "subtitles": "subtitles.vtt",
+    "explainer": "explainer.md"
+  },
+  "steps": [
+    "01-markup",
+    "02-style",
+    "03-behavior",
+    "04-polish"
+  ]
+}

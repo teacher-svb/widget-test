@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.000 --> 00:05.000
+We add a public float called speed. Public fields show up in the Inspector, so designers can tweak them.
+
+2
+00:05.000 --> 00:10.500
+In Update we call transform dot Rotate, turning the object around its Y axis.
+
+3
+00:10.500 --> 00:16.500
+Press play in Unity and it spins. But there is a problem: on a faster computer it spins faster.

@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.000 --> 00:05.500
+We fix it by multiplying with Time dot deltaTime, the number of seconds since the previous frame.
+
+2
+00:05.500 --> 00:11.000
+Now the value really means degrees per second, so we rename it to make that obvious.
+
+3
+00:11.000 --> 00:17.000
+SerializeField with private keeps the field visible in the Inspector without exposing it to other scripts.
+
+4
+00:17.000 --> 00:22.000
+And with an axis field you can spin the object in any direction you like.
