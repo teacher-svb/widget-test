@@ -1,17 +1,17 @@
 WEBVTT
 
 1
-00:00.400 --> 00:06.877
+00:00.400 --> 00:06.342
 We lossen het op door te vermenigvuldigen met Time punt deltaTime, het aantal seconden sinds het vorige frame.
 
 2
-00:06.877 --> 00:12.104
+00:06.342 --> 00:12.050
 Nu betekent de waarde echt graden per seconde, dus we geven hem een nieuwe naam die dat duidelijk maakt.
 
 3
-00:12.104 --> 00:18.496
+00:12.050 --> 00:18.499
 SerializeField met private houdt het veld zichtbaar in de Inspector, zonder het bloot te stellen aan andere scripts.
 
 4
-00:18.496 --> 00:23.064
+00:18.499 --> 00:23.451
 En met een axis-veld kun je het object in elke gewenste richting laten draaien.

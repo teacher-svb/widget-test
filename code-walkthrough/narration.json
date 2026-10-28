@@ -6,7 +6,24 @@
       "baseUrl": "http://192.168.50.203:8090",
       "model": "babbeldoos",
       "voice": "syndias-flemish-chatterbox",
-      "params": { "style": "Narration", "strength": 1.0 }
+      "params": {
+        "style": "Narration",
+        "strength": 1.0
+      }
+    },
+    "studio-eleven": {
+      "engine": "studio",
+      "baseUrl": "http://192.168.50.203:8090",
+      "model": "elevenlabs",
+      "voice": "1vlyDndG7KBxkupHaCmx",
+      "params": {
+        "model_id": "eleven_multilingual_v2",
+        "language_code": "nl",
+        "stability": 0.6,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "speed": 1.0
+      }
     }
   }
 }

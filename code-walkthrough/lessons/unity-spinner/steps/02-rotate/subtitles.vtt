@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.400 --> 00:07.246
+00:00.400 --> 00:07.120
 We voegen een public float toe met de naam speed. Public velden verschijnen in de Inspector, zodat designers ze kunnen aanpassen.
 
 2
-00:07.246 --> 00:13.427
+00:07.120 --> 00:11.714
 In Update roepen we transform punt Rotate aan, zodat het object om zijn Y-as draait.
 
 3
-00:13.427 --> 00:19.815
+00:11.714 --> 00:18.008
 Druk in Unity op play en het draait. Maar er is een probleem: op een snellere computer draait het sneller.

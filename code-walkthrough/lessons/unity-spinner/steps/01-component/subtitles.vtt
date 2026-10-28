@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.400 --> 00:06.332
+00:00.400 --> 00:05.995
 Elk script dat je in Unity aan een GameObject koppelt, is een klasse die erft van MonoBehaviour.
 
 2
-00:06.332 --> 00:11.867
+00:05.995 --> 00:11.492
 De klassenaam moet overeenkomen met de bestandsnaam, dus dit bestand heet Spinner punt cs.
 
 3
-00:11.867 --> 00:16.860
+00:11.492 --> 00:16.303
 Unity roept Update één keer per frame aan. Daar komt onze rotatie.
