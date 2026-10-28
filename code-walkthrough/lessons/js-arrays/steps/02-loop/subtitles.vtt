@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.000 --> 00:05.000
-To add up all the scores we start with a total of zero.
+00:00.400 --> 00:04.421
+Om alle scores op te tellen, beginnen we met een totaal van nul.
 
 2
-00:05.000 --> 00:11.000
-A for of loop gives us each item in turn. We add every score to the total.
+00:04.421 --> 00:10.003
+Een for of-lus geeft ons elk item om de beurt. We tellen elke score op bij het totaal.
 
 3
-00:11.000 --> 00:17.000
-After the loop we log the total and the average: the total divided by the number of scores.
+00:10.003 --> 00:16.462
+Na de lus loggen we het totaal en het gemiddelde: het totaal gedeeld door het aantal scores.

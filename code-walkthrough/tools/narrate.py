@@ -21,7 +21,10 @@ Usage:
 Settings come from narration.json (searched from the lesson folder upwards), and
 can be overridden per lesson with a "narration" object in lesson.json.
 
-Only the Python standard library and ffmpeg are needed.
+A profile with "engine": "studio" sends each step to Narration Studio instead,
+which then does the generation (with its own models, cache and pronunciation list).
+
+Only the Python standard library is needed, plus ffmpeg for the local engines.
 """
 import argparse
 import hashlib
@@ -32,6 +35,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.request
 import wave
@@ -310,20 +314,143 @@ def narrate_step(step_dir: Path, lesson: dict, s: dict, cache_dir: Path, args) -
         ff += ["-codec:a", "libmp3lame", "-qscale:a", str(s["mp3Quality"]), str(step_dir / output_name)]
         run_ffmpeg(ff)
 
-    # Subtitles: same text, real timings. Each cue stays visible until the next starts.
+    finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, total, output_name)
+    return True
+
+
+def finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, total, output_name):
+    """Write subtitles with the real timings and point the step at its audio."""
+    # Same text (markup kept), real timings. Each cue stays visible until the next starts.
     out = ["WEBVTT", ""]
     for i, (cue, (start, end)) in enumerate(zip(cues, timings)):
         shown_until = timings[i + 1][0] if i + 1 < len(timings) else total
         out += [str(i + 1), f"{fmt_ts(start)} --> {fmt_ts(max(end, shown_until))}", cue, ""]
     vtt_path.write_text("\n".join(out), encoding="utf-8")
 
-    # Make sure the player uses the new audio for this step.
     lesson_audio = lesson.get("files", {}).get("audio")
     if lesson_audio != output_name and meta.get("files", {}).get("audio") != output_name:
         meta.setdefault("files", {})["audio"] = output_name
         step_json_path.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n")
 
     print(f"      wrote {output_name} ({total:.1f}s) and updated {vtt_path.name}")
+
+
+# ---------------------------------------------------------------------------
+# Narration Studio as the engine: one job per step
+# ---------------------------------------------------------------------------
+
+class Studio:
+    """Small client for the Narration Studio HTTP API (see the narration stack README)."""
+
+    def __init__(self, s):
+        if not s.get("baseUrl"):
+            die("the studio profile needs a baseUrl, for example http://192.168.50.203:8090")
+        self.base = s["baseUrl"].rstrip("/")
+        self.timeout = s["timeout"]
+
+    def call(self, method, path, payload=None, raw=False, timeout=60):
+        body = json.dumps(payload).encode("utf-8") if payload is not None else None
+        req = urllib.request.Request(self.base + path, data=body, method=method,
+                                     headers={"Content-Type": "application/json"} if body else {})
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                data = resp.read()
+        except urllib.error.HTTPError as e:
+            try:
+                msg = json.loads(e.read().decode("utf-8")).get("error")
+            except ValueError:
+                msg = None
+            die(f"Narration Studio: {msg or f'HTTP {e.code} for {path}'}")
+        except urllib.error.URLError as e:
+            die(f"could not reach Narration Studio at {self.base}: {e.reason}")
+        return data if raw else json.loads(data.decode("utf-8"))
+
+    def check(self, engine_id, voice):
+        engines = {e["id"]: e for e in self.call("GET", "/api/engines")["engines"]}
+        if engine_id not in engines:
+            die(f"the studio has no model '{engine_id}'. Available: {', '.join(engines)}")
+        e = engines[engine_id]
+        if not e["status"].get("ready"):
+            die(f"{e['name']} is not ready: {e['status'].get('message')}")
+        ids = [v["id"] for v in e.get("voices", [])]
+        if voice not in ids:
+            names = ", ".join(f"{v['name']} ({v['id']})" if v["name"] != v["id"] else v["id"] for v in e.get("voices", []))
+            die(f"{e['name']} has no voice '{voice}'. Available: {names or 'none'}")
+        return e
+
+
+def studio_jobs_file(cache_dir):
+    return cache_dir / "studio-jobs.json"
+
+
+def narrate_step_studio(step_dir, lesson_dir, lesson, s, cache_dir, studio, args):
+    files = {**lesson.get("files", {})}
+    step_json_path = step_dir / "step.json"
+    meta = json.loads(step_json_path.read_text()) if step_json_path.exists() else {}
+    files.update(meta.get("files", {}))
+    vtt_path = step_dir / (files.get("subtitles") or "subtitles.vtt")
+    if not vtt_path.exists():
+        print(f"  {step_dir.name}: no subtitles, skipped")
+        return False
+    cues = parse_vtt(vtt_path.read_text(encoding="utf-8"))
+    if not cues:
+        print(f"  {step_dir.name}: subtitles contain no cues, skipped")
+        return False
+
+    # narration.json's lexicon and [[shown|spoken]] are applied here; the studio
+    # then applies its own pronunciation list on top.
+    spoken = [spoken_text(c, s["lexicon"]) for c in cues]
+    if args.dry_run:
+        print(f"  {step_dir.name}: {len(cues)} cues would be sent to the studio")
+        return False
+
+    # Reuse the same studio output per step: unchanged sentences come from the
+    # studio's cache, retakes made in the studio are kept, and the Library
+    # gets one entry per step instead of one per run.
+    jobs_path = studio_jobs_file(cache_dir)
+    try:
+        jobs = json.loads(jobs_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        jobs = {}
+    key = f"{lesson_dir.name}/{step_dir.name}"
+    title = f"{lesson.get('title', lesson_dir.name)}, {meta.get('title', step_dir.name)}"
+    payload = {
+        "id": jobs.get(key),
+        "engine": s["model"], "voice": s["voice"], "voiceLabel": s.get("voiceLabel", ""),
+        "params": s.get("params", {}), "split": "line", "text": "\n".join(spoken), "name": title,
+        "timing": {"leadIn": s["leadIn"], "gap": s["gap"], "tail": s["tail"]},
+    }
+    job = studio.call("POST", "/api/jobs", payload)
+    jobs[key] = job["id"]
+    jobs_path.write_text(json.dumps(jobs, indent=2), encoding="utf-8")
+    print(f"  {step_dir.name}: {len(cues)} cues sent to the studio (output {job['id']})")
+
+    started, last = time.time(), None
+    while job["state"] in ("queued", "running"):
+        if time.time() - started > s["timeout"]:
+            die(f"the studio did not finish within {s['timeout']} seconds")
+        time.sleep(1)
+        job = studio.call("GET", f"/api/jobs/{job['id']}")
+        prog = job.get("progress") or {}
+        line = f"{prog.get('done', 0)}/{prog.get('total', '?')}"
+        if job["state"] == "running" and line != last:
+            print(f"      generating {line}")
+            last = line
+    if job["state"] != "done":
+        die(f"the studio could not narrate {step_dir.name}: {job.get('error')}")
+    if len(job["lines"]) != len(cues):
+        die(f"the studio returned {len(job['lines'])} lines for {len(cues)} cues in {step_dir.name}")
+
+    output_name = s["output"]
+    audio = studio.call("GET", f"/files/{job['id']}/audio.mp3", raw=True, timeout=300)
+    (step_dir / output_name).write_bytes(audio)
+    timings = [[l["start"], l["end"]] for l in job["lines"]]
+    finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, job["result"]["duration"], output_name)
+
+    if not s.get("keepOutputs", True):
+        studio.call("DELETE", f"/api/outputs/{job['id']}")
+        jobs.pop(key, None)
+        jobs_path.write_text(json.dumps(jobs, indent=2), encoding="utf-8")
     return True
 
 
@@ -347,8 +474,19 @@ def main():
     config = json.loads(config_path.read_text())
     profile, s = resolve_settings(config, lesson, args.profile)
 
-    if not args.dry_run and not shutil.which("ffmpeg"):
+    use_studio = s["engine"] == "studio"
+    if not args.dry_run and not use_studio and not shutil.which("ffmpeg"):
         die("ffmpeg is not installed or not on PATH")
+    studio = None
+    if use_studio:
+        for k in ("model", "voice"):
+            if not s.get(k):
+                die(f"the studio profile needs \"{k}\" (model is the studio's model id, for example babbeldoos)")
+        studio = Studio(s)
+        e = studio.check(s["model"], s["voice"])
+        s.setdefault("voiceLabel", next((v["name"] for v in e["voices"] if v["id"] == s["voice"]), s["voice"]))
+        if args.force:
+            print("note: --force has no effect with the studio; use Generate again in the studio for a new take")
 
     cache_dir = Path(s["cacheDir"])
     if not cache_dir.is_absolute():
@@ -367,7 +505,11 @@ def main():
     print(f"{lesson.get('title', lesson_dir.name)}  (profile: {profile}, voice: {s.get('voice', '-')})")
     done = 0
     for sid in step_ids:
-        if narrate_step(steps_dir / sid, lesson, s, cache_dir, args):
+        if use_studio:
+            ok = narrate_step_studio(steps_dir / sid, lesson_dir, lesson, s, cache_dir, studio, args)
+        else:
+            ok = narrate_step(steps_dir / sid, lesson, s, cache_dir, args)
+        if ok:
             done += 1
     if not args.dry_run:
         print(f"Done: {done} step(s) narrated.")

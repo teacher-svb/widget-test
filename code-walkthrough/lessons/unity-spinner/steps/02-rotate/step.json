@@ -3,5 +3,8 @@
   "typing": {
     "fromCue": 1,
     "toCue": 2
+  },
+  "files": {
+    "audio": "audio.mp3"
   }
 }

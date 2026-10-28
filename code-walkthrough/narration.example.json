@@ -30,6 +30,13 @@
       "engine": "command",
       "command": ["piper", "--model", "/path/to/voices/nl_BE-rdh-medium.onnx", "--output_file", "{out}", "--length_scale", "{length_scale}"]
     },
+    "studio": {
+      "engine": "studio",
+      "baseUrl": "http://192.168.50.203:8090",
+      "model": "babbeldoos",
+      "voice": "syndias",
+      "params": { "style": "Narration", "strength": 1.0 }
+    },
     "qwen-en": {
       "engine": "openai",
       "baseUrl": "http://homelab.lan:8880",

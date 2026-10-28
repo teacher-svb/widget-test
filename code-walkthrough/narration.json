@@ -1,0 +1,12 @@
+{
+  "default": "studio",
+  "profiles": {
+    "studio": {
+      "engine": "studio",
+      "baseUrl": "http://192.168.50.203:8090",
+      "model": "babbeldoos",
+      "voice": "syndias-flemish-chatterbox",
+      "params": { "style": "Narration", "strength": 1.0 }
+    }
+  }
+}

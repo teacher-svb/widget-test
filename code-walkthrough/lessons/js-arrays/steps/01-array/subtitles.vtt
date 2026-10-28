@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.000 --> 00:04.500
-An array is an ordered list of values, written between square brackets.
+00:00.400 --> 00:05.107
+Een array is een geordende lijst van waarden, geschreven tussen vierkante haken.
 
 2
-00:04.500 --> 00:09.000
-length tells you how many items it holds. Here that is four.
+00:05.107 --> 00:09.451
+length vertelt je hoeveel items erin zitten. Hier zijn dat er vier.
 
 3
-00:09.000 --> 00:13.000
-Items are numbered from zero, so scores zero is the first one.
+00:09.451 --> 00:14.658
+Items worden genummerd vanaf nul, dus scores nul is het eerste item.
