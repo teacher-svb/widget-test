@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.386
+Nu dezelfde code in JavaScript.
+
+2
+00:02.386 --> 00:05.444
+Elk type wordt let, en bij const valt het type weg.
+
+3
+00:05.444 --> 00:10.806
+Een variabele declareer je maar één keer met let. Daarna gebruik je alleen nog de naam.

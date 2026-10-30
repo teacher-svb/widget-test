@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.851
+In script.js halen we die twee namen binnen met import.
+
+2
+00:03.851 --> 00:08.082
+Tussen de accolades staat wat we willen gebruiken, en na from het pad naar het bestand.
+
+3
+00:08.082 --> 00:14.069
+console.log toont een waarde in de console van de browser, zoals Console.WriteLine in C#.

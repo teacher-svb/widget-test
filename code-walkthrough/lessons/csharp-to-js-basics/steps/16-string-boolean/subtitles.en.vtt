@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.160
+Between backticks you put a value straight into the text.
+
+2
+00:03.160 --> 00:05.723
+With toString you turn any value into text.
+
+3
+00:05.723 --> 00:08.839
+A comparison gives a boolean: true or false.

@@ -1,6 +1,12 @@
 {
-  "title": "Operatoren in JavaScript",
-  "chapter": "Expressies en operatoren",
+  "title": {
+    "nl": "Operatoren in JavaScript",
+    "en": "Operators in JavaScript"
+  },
+  "chapter": {
+    "nl": "Expressies en operatoren",
+    "en": "Expressions and operators"
+  },
   "transition": "morph",
   "mode": "javascript",
   "languageLabel": "JavaScript",

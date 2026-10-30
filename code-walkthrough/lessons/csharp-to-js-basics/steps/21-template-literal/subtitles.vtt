@@ -1,9 +1,0 @@
-WEBVTT
-
-1
-00:00.400 --> 00:05.020
-Met een template literal heb je die plustekens niet meer nodig.
-
-2
-00:05.020 --> 00:13.000
-De variabelen staan tussen dollar-accolade, op de plaats waar ze in de zin komen. Zoals een dollar-string in C#.

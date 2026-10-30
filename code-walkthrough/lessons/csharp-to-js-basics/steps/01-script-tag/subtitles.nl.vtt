@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:07.424
+In C# start je programma vanzelf. JavaScript in de browser hoort altijd bij een HTML-pagina.
+
+2
+00:07.424 --> 00:10.090
+In de head voegen we een script-element toe.
+
+3
+00:10.090 --> 00:15.638
+Het attribuut src wijst naar het bestand script.js in de map js.
+
+4
+00:15.638 --> 00:19.740
+Met type="module" wordt het bestand een JavaScript-module.

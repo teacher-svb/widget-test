@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.188
+An expression consists of operands and an operator.
+
+2
+00:04.188 --> 00:12.367
+Seven apples for two kids. In C#, seven divided by two gives three, because both numbers are ints.

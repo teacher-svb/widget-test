@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.400
+In JavaScript you don't need a class.
+
+2
+00:02.400 --> 00:06.946
+export replaces public. Everything you export, another file can import.
+
+3
+00:06.946 --> 00:12.046
+The function uses a template literal: text between backticks, with the name inside.

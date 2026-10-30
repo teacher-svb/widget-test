@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.151
+JavaScript has fewer types.
+
+2
+00:02.151 --> 00:07.066
+There is one type number for whole numbers and decimals, and no separate type for one character.
+
+3
+00:07.066 --> 00:14.620
+A variable without a value is undefined. That looks like null, but null is something you set yourself, on purpose.
+
+4
+00:14.620 --> 00:18.932
+Objects and arrays are complex types. They come in a later chapter.

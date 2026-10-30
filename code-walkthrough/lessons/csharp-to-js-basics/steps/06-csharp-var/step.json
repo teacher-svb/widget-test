@@ -1,6 +1,12 @@
 {
-  "title": "C# het type laten afleiden",
-  "chapter": "Variabelen",
+  "title": {
+    "nl": "C# het type laten afleiden",
+    "en": "Let C# infer the type"
+  },
+  "chapter": {
+    "nl": "Variabelen",
+    "en": "Variables"
+  },
   "transition": "morph",
   "typing": {
     "fromCue": 2

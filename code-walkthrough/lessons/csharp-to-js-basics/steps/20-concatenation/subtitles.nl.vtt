@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.595
+Het plusteken werkt ook op strings: het plakt ze aan elkaar.
+
+2
+00:03.595 --> 00:09.811
+Is één van de twee een string, dan is het resultaat altijd een string. De tekst één plus twee wordt twaalf.

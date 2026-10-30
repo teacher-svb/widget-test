@@ -1,6 +1,12 @@
 {
-  "title": "Types in C#",
-  "chapter": "Data types",
+  "title": {
+    "nl": "Types in C#",
+    "en": "Types in C#"
+  },
+  "chapter": {
+    "nl": "Data types",
+    "en": "Data types"
+  },
   "transition": "fade",
   "mode": "text/x-csharp",
   "languageLabel": "C#",

@@ -1,6 +1,12 @@
 {
-  "title": "Duidelijke namen in lowerCamelCase",
-  "chapter": "Naamgeving",
+  "title": {
+    "nl": "Duidelijke namen in lowerCamelCase",
+    "en": "Descriptive names in lowerCamelCase"
+  },
+  "chapter": {
+    "nl": "Naamgeving",
+    "en": "Naming"
+  },
   "transition": "morph",
   "typing": {
     "fromCue": 1

@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.535
+With a template literal you no longer need those plus signs.
+
+2
+00:03.535 --> 00:11.052
+The variables go between dollar curly braces, right where they belong in the sentence. Like a dollar string in C#.

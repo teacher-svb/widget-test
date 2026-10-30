@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.674
+In script.js we bring in those two names with import.
+
+2
+00:03.674 --> 00:08.711
+Between the curly braces is what we want to use, and after from comes the path to the file.
+
+3
+00:08.711 --> 00:14.975
+console.log shows a value in the browser console, like Console.WriteLine in C#.

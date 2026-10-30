@@ -8,9 +8,9 @@
   "cps": 15,
   "files": {
     "code": "code.js",
-    "audio": null,
-    "subtitles": "subtitles.vtt",
-    "explainer": "explainer.md"
+    "audio": "audio.{lang}.mp3",
+    "subtitles": "subtitles.{lang}.vtt",
+    "explainer": "explainer.{lang}.md"
   },
   "starterCode": "<!DOCTYPE html>\n<html lang=\"nl\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Mijn eerste script</title>\n</head>\n<body>\n    <h1>Hallo JavaScript</h1>\n</body>\n</html>\n",
   "steps": [
@@ -41,5 +41,18 @@
     "25-js-strings",
     "26-search-replace",
     "27-quotes-escapes"
-  ]
+  ],
+  "languages": [
+    "nl",
+    "en"
+  ],
+  "defaultLanguage": "nl",
+  "narration": {
+    "nl": {
+      "profile": "elevenlabs-syndias-flemish"
+    },
+    "en": {
+      "profile": "elevenlabs-chris-english"
+    }
+  }
 }

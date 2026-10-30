@@ -1,6 +1,12 @@
 {
-  "title": "Code in een apart bestand in C#",
-  "chapter": "JS linken",
+  "title": {
+    "nl": "Code in een apart bestand in C#",
+    "en": "Code in a separate file in C#"
+  },
+  "chapter": {
+    "nl": "JS linken",
+    "en": "Linking JavaScript"
+  },
   "transition": "fade",
   "mode": "text/x-csharp",
   "languageLabel": "C#",

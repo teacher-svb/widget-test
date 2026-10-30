@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.627
+In C# a string has many methods.
+
+2
+00:02.627 --> 00:07.584
+Pay special attention to Substring: the second number is the length of the piece.

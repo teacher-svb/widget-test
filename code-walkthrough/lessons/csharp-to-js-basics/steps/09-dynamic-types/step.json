@@ -1,6 +1,12 @@
 {
-  "title": "Het type hoort bij de waarde",
-  "chapter": "Variabelen",
+  "title": {
+    "nl": "Het type hoort bij de waarde",
+    "en": "Types belong to values"
+  },
+  "chapter": {
+    "nl": "Variabelen",
+    "en": "Variables"
+  },
   "typing": {
     "fromCue": 2,
     "toCue": 2

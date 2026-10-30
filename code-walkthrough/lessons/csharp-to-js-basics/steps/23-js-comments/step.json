@@ -1,6 +1,12 @@
 {
-  "title": "Commentaar in JavaScript",
-  "chapter": "Commentaar",
+  "title": {
+    "nl": "Commentaar in JavaScript",
+    "en": "Comments in JavaScript"
+  },
+  "chapter": {
+    "nl": "Commentaar",
+    "en": "Comments"
+  },
   "transition": "morph",
   "mode": "javascript",
   "languageLabel": "JavaScript",

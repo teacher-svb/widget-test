@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.534
+In JavaScript is commentaar precies hetzelfde. Alleen console.log verandert.
+
+2
+00:04.534 --> 00:09.681
+Met commentaar schakel je ook snel code uit: de uitgeschakelde regel verschijnt niet in de console.
+
+3
+00:09.681 --> 00:14.283
+In je editor zet Ctrl+/ commentaar aan of uit op de geselecteerde regels.

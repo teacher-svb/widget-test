@@ -1,6 +1,12 @@
 {
-  "title": "Template literals in plaats van +",
-  "chapter": "Expressies en operatoren",
+  "title": {
+    "nl": "Template literals in plaats van +",
+    "en": "Template literals instead of +"
+  },
+  "chapter": {
+    "nl": "Expressies en operatoren",
+    "en": "Expressions and operators"
+  },
   "transition": "morph",
   "typing": {
     "fromCue": 1

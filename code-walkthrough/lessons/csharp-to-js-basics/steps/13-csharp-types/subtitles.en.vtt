@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:08.687
+In C# you know many types: int and double for numbers, char for one character, string and bool.
+
+2
+00:08.687 --> 00:12.964
+null means: there is deliberately nothing in here.

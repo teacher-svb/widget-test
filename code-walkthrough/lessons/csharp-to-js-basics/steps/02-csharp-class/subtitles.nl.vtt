@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.658
+Code die je op meerdere plaatsen nodig hebt, zet je in een apart bestand.
+
+2
+00:04.658 --> 00:09.951
+In C# maak je daarvoor een klasse. Met public mogen andere bestanden ze gebruiken.

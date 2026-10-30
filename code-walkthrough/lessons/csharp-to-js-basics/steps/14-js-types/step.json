@@ -1,6 +1,12 @@
 {
-  "title": "Types in JavaScript",
-  "chapter": "Data types",
+  "title": {
+    "nl": "Types in JavaScript",
+    "en": "Types in JavaScript"
+  },
+  "chapter": {
+    "nl": "Data types",
+    "en": "Data types"
+  },
   "transition": "morph",
   "mode": "javascript",
   "languageLabel": "JavaScript",

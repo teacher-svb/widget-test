@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.396
+Een variabele is een plaats in het geheugen met een naam.
+
+2
+00:03.396 --> 00:09.295
+In C# declareer je ze met een type. Later ken je een waarde toe, en die kan je opnieuw veranderen.
+
+3
+00:09.295 --> 00:12.313
+Met const maak je een waarde die nooit verandert.

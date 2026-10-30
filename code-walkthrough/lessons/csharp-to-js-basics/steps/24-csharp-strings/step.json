@@ -1,6 +1,12 @@
 {
-  "title": "Stringmethodes in C#",
-  "chapter": "Strings",
+  "title": {
+    "nl": "Stringmethodes in C#",
+    "en": "String methods in C#"
+  },
+  "chapter": {
+    "nl": "Strings",
+    "en": "Strings"
+  },
   "transition": "fade",
   "mode": "text/x-csharp",
   "languageLabel": "C#",

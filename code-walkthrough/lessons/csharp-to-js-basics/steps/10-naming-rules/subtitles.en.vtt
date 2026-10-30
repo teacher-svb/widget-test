@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.514
+A name may contain letters, digits, a dollar sign and an underscore.
+
+2
+00:04.514 --> 00:08.207
+A name may not start with a digit, and a hyphen is not allowed.
+
+3
+00:08.207 --> 00:12.541
+Reserved words like let, class or return can't be used as a name.
+
+4
+00:12.541 --> 00:17.451
+Capitals matter: apple and [[AppLE|apple with capitals]] are two different variables.

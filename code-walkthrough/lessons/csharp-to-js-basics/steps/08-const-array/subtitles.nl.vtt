@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.664
+Let op: const legt de variabele vast, niet de inhoud.
+
+2
+00:03.664 --> 00:06.207
+Een constante array kan je nog aanvullen met push.
+
+3
+00:06.207 --> 00:10.644
+Maar de constante zelf een nieuwe waarde geven, lukt niet. Dat geeft een TypeError.
+
+4
+00:10.644 --> 00:15.063
+Gebruik const als je zeker weet dat de variabele niet verandert.

@@ -1,6 +1,12 @@
 {
-  "title": "Namen die niets zeggen",
-  "chapter": "Naamgeving",
+  "title": {
+    "nl": "Namen die niets zeggen",
+    "en": "Names that say nothing"
+  },
+  "chapter": {
+    "nl": "Naamgeving",
+    "en": "Naming"
+  },
   "transition": "fade",
   "typing": {
     "fromCue": 1

@@ -1,6 +1,12 @@
 {
-  "title": "Een script aan de pagina koppelen",
-  "chapter": "JS linken",
+  "title": {
+    "nl": "Een script aan de pagina koppelen",
+    "en": "Link a script to the page"
+  },
+  "chapter": {
+    "nl": "JS linken",
+    "en": "Linking JavaScript"
+  },
   "mode": "htmlmixed",
   "languageLabel": "index.html",
   "preview": null,

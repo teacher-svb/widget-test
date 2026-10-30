@@ -1,6 +1,12 @@
 {
-  "title": "Stringmethodes in JavaScript",
-  "chapter": "Strings",
+  "title": {
+    "nl": "Stringmethodes in JavaScript",
+    "en": "String methods in JavaScript"
+  },
+  "chapter": {
+    "nl": "Strings",
+    "en": "Strings"
+  },
   "transition": "morph",
   "mode": "javascript",
   "languageLabel": "JavaScript",

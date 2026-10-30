@@ -1,6 +1,12 @@
 {
-  "title": "Variabelen in C#",
-  "chapter": "Variabelen",
+  "title": {
+    "nl": "Variabelen in C#",
+    "en": "Variables in C#"
+  },
+  "chapter": {
+    "nl": "Variabelen",
+    "en": "Variables"
+  },
   "transition": "fade",
   "mode": "text/x-csharp",
   "languageLabel": "C#",

@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.604
+The plus sign also works on strings: it glues them together.
+
+2
+00:04.604 --> 00:10.556
+If one of the two is a string, the result is always a string. The text one plus two becomes twelve.

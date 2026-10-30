@@ -1,6 +1,12 @@
 {
-  "title": "Importeren in een andere module",
-  "chapter": "JS linken",
+  "title": {
+    "nl": "Importeren in een andere module",
+    "en": "Import in another module"
+  },
+  "chapter": {
+    "nl": "JS linken",
+    "en": "Linking JavaScript"
+  },
   "transition": "morph",
   "languageLabel": "js/script.js",
   "typing": {

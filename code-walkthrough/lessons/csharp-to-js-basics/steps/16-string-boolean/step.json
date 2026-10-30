@@ -1,6 +1,12 @@
 {
-  "title": "Strings en booleans",
-  "chapter": "Data types",
+  "title": {
+    "nl": "Strings en booleans",
+    "en": "Strings and booleans"
+  },
+  "chapter": {
+    "nl": "Data types",
+    "en": "Data types"
+  },
   "typing": {
     "fromCue": 1,
     "toCue": 3

@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.580
+There is one big difference with C#.
+
+2
+00:02.580 --> 00:06.434
+In JavaScript, a variable that holds text may hold a number afterwards.
+
+3
+00:06.434 --> 00:15.038
+C# is strongly typed: there the type is fixed. In JavaScript the type belongs to the value, not to the variable.

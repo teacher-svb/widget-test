@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:08.007
+In C# your program starts by itself. JavaScript in the browser always belongs to an HTML page.
+
+2
+00:08.007 --> 00:09.864
+In the head we add a script element.
+
+3
+00:09.864 --> 00:14.569
+The src attribute points to the file script.js in the js folder.
+
+4
+00:14.569 --> 00:18.609
+With type="module" the file becomes a JavaScript module.

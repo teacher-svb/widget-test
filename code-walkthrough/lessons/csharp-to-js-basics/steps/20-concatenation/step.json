@@ -1,6 +1,12 @@
 {
-  "title": "Strings aan elkaar plakken met +",
-  "chapter": "Expressies en operatoren",
+  "title": {
+    "nl": "Strings aan elkaar plakken met +",
+    "en": "Gluing strings with +"
+  },
+  "chapter": {
+    "nl": "Expressies en operatoren",
+    "en": "Expressions and operators"
+  },
   "transition": "fade",
   "typing": {
     "fromCue": 1

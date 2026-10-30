@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:06.747
+In JavaScript the methods start with a lowercase letter, and length is a property without parentheses.
+
+2
+00:06.747 --> 00:15.936
+Careful: with substring the second number is the end position, and that character itself is not included. That's why twelve instead of six.
+
+3
+00:15.936 --> 00:23.192
+ToUpper is called toUpperCase here. trim removes spaces, tabs and newlines at the start and the end.

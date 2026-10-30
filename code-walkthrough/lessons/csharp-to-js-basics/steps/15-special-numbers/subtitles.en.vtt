@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:06.908
+In C# your program crashes when you divide a whole number by zero. JavaScript returns a special number instead.
+
+2
+00:06.908 --> 00:10.699
+Dividing by zero gives Infinity or minus Infinity.
+
+3
+00:10.699 --> 00:17.371
+A calculation that fails gives NaN: not a number. You often see it with parseInt on text that isn't a number.

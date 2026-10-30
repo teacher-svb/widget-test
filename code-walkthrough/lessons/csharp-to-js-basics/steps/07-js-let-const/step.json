@@ -1,6 +1,12 @@
 {
-  "title": "let en const in JavaScript",
-  "chapter": "Variabelen",
+  "title": {
+    "nl": "let en const in JavaScript",
+    "en": "let and const in JavaScript"
+  },
+  "chapter": {
+    "nl": "Variabelen",
+    "en": "Variables"
+  },
   "transition": "morph",
   "mode": "javascript",
   "languageLabel": "JavaScript",

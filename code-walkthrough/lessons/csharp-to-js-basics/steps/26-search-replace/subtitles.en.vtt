@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:06.601
+indexOf is case-sensitive: it doesn't find Wereld with a capital, so minus one.
+
+2
+00:06.601 --> 00:13.778
+replace only replaces the first match it finds. With [[/la/g|slash la slash g]] you replace them all.
+
+3
+00:13.778 --> 00:18.506
+repeat repeats a string, and toLowerCase turns everything into lowercase.

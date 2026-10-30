@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:07.218
+In C# crasht je programma als je een geheel getal door nul deelt. JavaScript geeft een speciaal getal terug.
+
+2
+00:07.218 --> 00:10.466
+Delen door nul geeft Infinity of min Infinity.
+
+3
+00:10.466 --> 00:17.567
+Een berekening die niet lukt, geeft NaN: not a number. Dat zie je vaak bij parseInt met tekst die geen getal is.

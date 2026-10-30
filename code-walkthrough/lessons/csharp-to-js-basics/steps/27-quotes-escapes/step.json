@@ -1,6 +1,12 @@
 {
-  "title": "Aanhalingstekens en speciale tekens",
-  "chapter": "Strings",
+  "title": {
+    "nl": "Aanhalingstekens en speciale tekens",
+    "en": "Quotes and special characters"
+  },
+  "chapter": {
+    "nl": "Strings",
+    "en": "Strings"
+  },
   "transition": "fade",
   "typing": {
     "fromCue": 1

@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.869
+In JavaScript the operators stay almost the same.
+
+2
+00:02.869 --> 00:11.731
+But here seven divided by two gives three point five. There is only one type number, so there is no integer division.
+
+3
+00:11.731 --> 00:15.714
+The percent sign gives the remainder of a division. It has nothing to do with percentages.
+
+4
+00:15.714 --> 00:20.217
+Two asterisks is the power: two to the third is eight.

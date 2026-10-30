@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.776
+C# can also infer the type by itself.
+
+2
+00:02.776 --> 00:07.572
+With var the compiler looks at the value on the right and picks the type itself.
+
+3
+00:07.572 --> 00:12.911
+highScore is still an int. The type is no longer written, but it is still fixed.

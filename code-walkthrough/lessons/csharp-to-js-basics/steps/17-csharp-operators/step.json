@@ -1,6 +1,12 @@
 {
-  "title": "Operatoren in C#",
-  "chapter": "Expressies en operatoren",
+  "title": {
+    "nl": "Operatoren in C#",
+    "en": "Operators in C#"
+  },
+  "chapter": {
+    "nl": "Expressies en operatoren",
+    "en": "Expressions and operators"
+  },
   "transition": "fade",
   "mode": "text/x-csharp",
   "languageLabel": "C#",

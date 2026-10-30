@@ -1,6 +1,12 @@
 {
-  "title": "Volgorde van bewerkingen en verkorte notaties",
-  "chapter": "Expressies en operatoren",
+  "title": {
+    "nl": "Volgorde van bewerkingen en verkorte notaties",
+    "en": "Order of operations and shorthand"
+  },
+  "chapter": {
+    "nl": "Expressies en operatoren",
+    "en": "Expressions and operators"
+  },
   "typing": {
     "fromCue": 1,
     "toCue": 3

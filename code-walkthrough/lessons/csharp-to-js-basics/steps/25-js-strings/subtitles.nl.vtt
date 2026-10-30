@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:05.826
+In JavaScript beginnen de methodes met een kleine letter, en length is een property zonder haakjes.
+
+2
+00:05.826 --> 00:13.063
+Opgelet: bij substring is het tweede getal de eindpositie, en dat teken zit er zelf niet bij. Daarom twaalf in plaats van zes.
+
+3
+00:13.063 --> 00:18.669
+ToUpper heet hier toUpperCase. trim haalt spaties, tabs en enters weg aan het begin en het einde.

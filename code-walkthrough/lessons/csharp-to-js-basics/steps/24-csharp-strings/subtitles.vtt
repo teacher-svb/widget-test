@@ -1,9 +1,0 @@
-WEBVTT
-
-1
-00:00.400 --> 00:03.340
-In C# heeft een string veel methodes.
-
-2
-00:03.340 --> 00:08.800
-Let vooral op Substring: het tweede getal is de lengte van het stuk.

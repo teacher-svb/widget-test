@@ -1,6 +1,12 @@
 {
-  "title": "Zoeken, vervangen, herhalen",
-  "chapter": "Strings",
+  "title": {
+    "nl": "Zoeken, vervangen, herhalen",
+    "en": "Searching, replacing, repeating"
+  },
+  "chapter": {
+    "nl": "Strings",
+    "en": "Strings"
+  },
   "typing": {
     "fromCue": 1,
     "toCue": 3

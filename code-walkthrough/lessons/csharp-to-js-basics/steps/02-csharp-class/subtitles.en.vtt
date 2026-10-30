@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.481
+Code you need in several places goes into a separate file.
+
+2
+00:03.481 --> 00:09.470
+In C# you make a class for that. With public, other files are allowed to use it.

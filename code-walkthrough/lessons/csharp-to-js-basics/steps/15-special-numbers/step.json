@@ -1,6 +1,12 @@
 {
-  "title": "Infinity en NaN",
-  "chapter": "Data types",
+  "title": {
+    "nl": "Infinity en NaN",
+    "en": "Infinity and NaN"
+  },
+  "chapter": {
+    "nl": "Data types",
+    "en": "Data types"
+  },
   "typing": {
     "fromCue": 2,
     "toCue": 3

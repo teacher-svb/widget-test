@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.748
+A variable is a named place in memory.
+
+2
+00:02.748 --> 00:08.680
+In C# you declare it with a type. Later you assign a value, and you can change that value again.
+
+3
+00:08.680 --> 00:11.982
+With const you create a value that never changes.

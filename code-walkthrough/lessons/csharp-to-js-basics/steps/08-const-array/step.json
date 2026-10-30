@@ -1,6 +1,12 @@
 {
-  "title": "const legt de variabele vast, niet de inhoud",
-  "chapter": "Variabelen",
+  "title": {
+    "nl": "const legt de variabele vast, niet de inhoud",
+    "en": "const fixes the variable, not the content"
+  },
+  "chapter": {
+    "nl": "Variabelen",
+    "en": "Variables"
+  },
   "typing": {
     "fromCue": 2,
     "toCue": 3

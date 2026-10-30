@@ -1,6 +1,12 @@
 {
-  "title": "Regels voor namen",
-  "chapter": "Naamgeving",
+  "title": {
+    "nl": "Regels voor namen",
+    "en": "Naming rules"
+  },
+  "chapter": {
+    "nl": "Naamgeving",
+    "en": "Naming"
+  },
   "transition": "fade",
   "typing": {
     "fromCue": 1

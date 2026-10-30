@@ -1,6 +1,12 @@
 {
-  "title": "Exporteren uit een module",
-  "chapter": "JS linken",
+  "title": {
+    "nl": "Exporteren uit een module",
+    "en": "Export from a module"
+  },
+  "chapter": {
+    "nl": "JS linken",
+    "en": "Linking JavaScript"
+  },
   "transition": "morph",
   "mode": "javascript",
   "languageLabel": "js/utils.js",

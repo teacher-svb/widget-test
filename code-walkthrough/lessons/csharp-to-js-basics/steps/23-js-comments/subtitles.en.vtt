@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.789
+In JavaScript, comments are exactly the same. Only console.log changes.
+
+2
+00:04.789 --> 00:09.589
+Comments are also a quick way to switch code off: the disabled line does not appear in the console.
+
+3
+00:09.589 --> 00:14.667
+In your editor, Ctrl+/ turns comments on or off for the selected lines.

@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.726
+Er is één groot verschil met C#.
+
+2
+00:02.726 --> 00:06.936
+In JavaScript mag een variabele met tekst daarna een getal bevatten.
+
+3
+00:06.936 --> 00:14.718
+C# is strongly typed: daar ligt het type vast. In JavaScript hoort het type bij de waarde, niet bij de variabele.

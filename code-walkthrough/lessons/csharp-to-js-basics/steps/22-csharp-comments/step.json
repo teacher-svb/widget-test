@@ -1,6 +1,12 @@
 {
-  "title": "Commentaar in C#",
-  "chapter": "Commentaar",
+  "title": {
+    "nl": "Commentaar in C#",
+    "en": "Comments in C#"
+  },
+  "chapter": {
+    "nl": "Commentaar",
+    "en": "Comments"
+  },
   "transition": "fade",
   "mode": "text/x-csharp",
   "languageLabel": "C#",

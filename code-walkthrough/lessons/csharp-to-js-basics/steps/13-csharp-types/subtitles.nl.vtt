@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:06.898
+In C# ken je veel types: int en double voor getallen, char voor één teken, string en bool.
+
+2
+00:06.898 --> 00:10.019
+null betekent: hier zit bewust niets in.

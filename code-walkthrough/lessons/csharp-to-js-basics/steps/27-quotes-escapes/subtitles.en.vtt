@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.034
+You can show quotes inside a string in two ways.
+
+2
+00:03.034 --> 00:06.843
+Either you pick the other kind of quotes, or you put a backslash in front.
+
+3
+00:06.843 --> 00:14.782
+A backslash turns the next character into a special character: [[\n|backslash n]] is a new line, [[\t|backslash t]] a tab.
+
+4
+00:14.782 --> 00:21.388
+If you want a real backslash, you write two. With backticks, a string can also span several lines.

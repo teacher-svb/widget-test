@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.145
+With clear names, the code reads like a sentence.
+
+2
+00:04.145 --> 00:11.409
+Names with several words are written in lowerCamelCase: the first word in lowercase, every next word with a capital.
+
+3
+00:11.409 --> 00:18.819
+In C# you use PascalCase for methods and properties. In JavaScript you write almost everything in lowerCamelCase.
