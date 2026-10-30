@@ -1,0 +1,11 @@
+{
+  "title": "Types in JavaScript",
+  "chapter": "Data types",
+  "transition": "morph",
+  "mode": "javascript",
+  "languageLabel": "JavaScript",
+  "preview": "console",
+  "typing": {
+    "fromCue": 2
+  }
+}

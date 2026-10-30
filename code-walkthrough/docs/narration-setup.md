@@ -5,6 +5,8 @@
 - **Chatterbox Multilingual** on the homelab GPU, for the final Dutch narration in your own voice
 - **Piper** on the CPU, for quick drafts while you are still writing a lesson
 
+Prefer a web interface? The separate **narration-stack** (Narration Studio) runs Chatterbox and Piper in one Dockge stack, with voice cloning in the browser, per-sentence retakes and a "save to lesson step" button. It writes the same files as `narrate.py`.
+
 The details below were correct when written, but both projects move fast. Check their READMEs if a command does not match.
 
 ## Chatterbox Multilingual (GPU)

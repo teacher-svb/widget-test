@@ -1,0 +1,14 @@
+{
+  "title": "Exporteren uit een module",
+  "chapter": "JS linken",
+  "transition": "morph",
+  "mode": "javascript",
+  "languageLabel": "js/utils.js",
+  "preview": null,
+  "typing": {
+    "fromCue": 2
+  },
+  "files": {
+    "code": "utils.js"
+  }
+}

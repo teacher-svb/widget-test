@@ -1,0 +1,14 @@
+{
+  "title": "Variabelen in C#",
+  "chapter": "Variabelen",
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "C#",
+  "preview": null,
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "code.cs"
+  }
+}

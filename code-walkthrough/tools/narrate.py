@@ -21,6 +21,11 @@ Usage:
 Settings come from narration.json (searched from the lesson folder upwards), and
 can be overridden per lesson with a "narration" object in lesson.json.
 
+Multilingual lessons ("languages": ["nl", "en"] in lesson.json, file names with
+{lang}) are narrated per language, each with its own profile and lexicon:
+  python3 tools/narrate.py lessons/my-lesson               # every language
+  python3 tools/narrate.py lessons/my-lesson --lang en     # only English
+
 A profile with "engine": "studio" sends each step to Narration Studio instead,
 which then does the generation (with its own models, cache and pronunciation list).
 
@@ -88,20 +93,47 @@ def find_config(start: Path, explicit: str | None) -> Path:
         "Copy narration.example.json to narration.json and edit it.")
 
 
-def resolve_settings(config: dict, lesson: dict, profile_name: str | None):
+def resolve_settings(config: dict, lesson: dict, profile_name: str | None, lang: str | None):
+    """Merge, from general to specific: narration.json settings, its
+    languages[lang], the profile, the lesson's narration and the lesson's
+    narration[lang]. The profile comes from the command line, the lesson
+    (per language first), narration.json's languages[lang], or the default."""
     profiles = config.get("profiles", {})
-    lesson_over = dict(lesson.get("narration", {}))
-    name = profile_name or lesson_over.pop("profile", None) or config.get("default")
-    lesson_over.pop("profile", None)
+    langs = lesson.get("languages") or []
+    narration = lesson.get("narration", {})
+    lesson_over = {k: v for k, v in narration.items() if k not in langs}
+    lesson_lang = dict(narration.get(lang, {})) if lang in langs else {}
+    config_lang = dict(config.get("languages", {}).get(lang, {})) if lang else {}
+    name = (profile_name or lesson_lang.get("profile") or lesson_over.get("profile")
+            or config_lang.get("profile") or config.get("default"))
     if not name or name not in profiles:
         die(f"profile '{name}' not found. Available: {', '.join(profiles) or 'none'}")
     s = dict(DEFAULTS)
     lexicon = {}
-    for layer in (config.get("settings", {}), profiles[name], lesson_over):
+    for layer in (config.get("settings", {}), config_lang, profiles[name], lesson_over, lesson_lang):
         lexicon.update(layer.get("lexicon", {}))
-        s.update({k: v for k, v in layer.items() if k != "lexicon"})
+        s.update({k: v for k, v in layer.items() if k not in ("lexicon", "profile")})
     s["lexicon"] = lexicon
     return name, s
+
+
+def named(file: str, lang: str | None) -> str:
+    return file.replace("{lang}", lang) if lang else file
+
+
+def step_files(lesson: dict, meta: dict) -> dict:
+    return {**lesson.get("files", {}), **meta.get("files", {})}
+
+
+def audio_target(lesson: dict, meta: dict, s: dict, lang: str | None):
+    """(name to store in step.json, file to write). A multilingual lesson
+    writes one audio file per language, so its audio name needs {lang}."""
+    if not lesson.get("languages"):
+        return s["output"], s["output"]
+    template = step_files(lesson, meta).get("audio") or "audio.{lang}.mp3"
+    if "{lang}" not in template:
+        die(f"the audio file name '{template}' needs {{lang}} in a multilingual lesson, for example audio.{{lang}}.mp3")
+    return template, named(template, lang)
 
 
 def parse_vtt(text: str):
@@ -252,20 +284,26 @@ def silence(seconds: float) -> bytes:
     return b"\x00\x00" * int(round(seconds * SAMPLE_RATE))
 
 
-def narrate_step(step_dir: Path, lesson: dict, s: dict, cache_dir: Path, args) -> bool:
-    files = {**lesson.get("files", {})}
+def read_step(step_dir: Path, lesson: dict, lang: str | None):
+    """step.json, the subtitle file for `lang` and its cues; None when there is nothing to narrate."""
     step_json_path = step_dir / "step.json"
     meta = json.loads(step_json_path.read_text()) if step_json_path.exists() else {}
-    files.update(meta.get("files", {}))
-    vtt_path = step_dir / (files.get("subtitles") or "subtitles.vtt")
+    vtt_path = step_dir / named(step_files(lesson, meta).get("subtitles") or "subtitles.vtt", lang)
     if not vtt_path.exists():
-        print(f"  {step_dir.name}: no subtitles, skipped")
-        return False
-
+        print(f"  {step_dir.name}: no {vtt_path.name}, skipped")
+        return None
     cues = parse_vtt(vtt_path.read_text(encoding="utf-8"))
     if not cues:
-        print(f"  {step_dir.name}: subtitles contain no cues, skipped")
+        print(f"  {step_dir.name}: {vtt_path.name} contains no cues, skipped")
+        return None
+    return step_json_path, meta, vtt_path, cues
+
+
+def narrate_step(step_dir: Path, lesson: dict, s: dict, cache_dir: Path, args, lang: str | None) -> bool:
+    found = read_step(step_dir, lesson, lang)
+    if not found:
         return False
+    step_json_path, meta, vtt_path, cues = found
 
     spoken = [spoken_text(c, s["lexicon"]) for c in cues]
     missing = [t for t in spoken if args.force or not (cache_dir / f"{cache_key(s, t)}.wav").exists()]
@@ -300,7 +338,7 @@ def narrate_step(step_dir: Path, lesson: dict, s: dict, cache_dir: Path, args) -
     frames.append(silence(s["tail"]))
     total = t + s["tail"]
 
-    output_name = s["output"]
+    audio_name, output_name = audio_target(lesson, meta, s, lang)
     with tempfile.TemporaryDirectory() as tmp:
         joined = Path(tmp) / "joined.wav"
         with wave.open(str(joined), "wb") as w:
@@ -314,12 +352,13 @@ def narrate_step(step_dir: Path, lesson: dict, s: dict, cache_dir: Path, args) -
         ff += ["-codec:a", "libmp3lame", "-qscale:a", str(s["mp3Quality"]), str(step_dir / output_name)]
         run_ffmpeg(ff)
 
-    finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, total, output_name)
+    finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, total, audio_name, output_name)
     return True
 
 
-def finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, total, output_name):
-    """Write subtitles with the real timings and point the step at its audio."""
+def finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, total, audio_name, output_name):
+    """Write subtitles with the real timings and point the step at its audio
+    (`audio_name`, which can contain {lang})."""
     # Same text (markup kept), real timings. Each cue stays visible until the next starts.
     out = ["WEBVTT", ""]
     for i, (cue, (start, end)) in enumerate(zip(cues, timings)):
@@ -328,8 +367,8 @@ def finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, total, ou
     vtt_path.write_text("\n".join(out), encoding="utf-8")
 
     lesson_audio = lesson.get("files", {}).get("audio")
-    if lesson_audio != output_name and meta.get("files", {}).get("audio") != output_name:
-        meta.setdefault("files", {})["audio"] = output_name
+    if lesson_audio != audio_name and meta.get("files", {}).get("audio") != audio_name:
+        meta.setdefault("files", {})["audio"] = audio_name
         step_json_path.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n")
 
     print(f"      wrote {output_name} ({total:.1f}s) and updated {vtt_path.name}")
@@ -372,30 +411,30 @@ class Studio:
         e = engines[engine_id]
         if not e["status"].get("ready"):
             die(f"{e['name']} is not ready: {e['status'].get('message')}")
-        ids = [v["id"] for v in e.get("voices", [])]
-        if voice not in ids:
-            names = ", ".join(f"{v['name']} ({v['id']})" if v["name"] != v["id"] else v["id"] for v in e.get("voices", []))
-            die(f"{e['name']} has no voice '{voice}'. Available: {names or 'none'}")
-        return e
+        voices = e.get("voices", [])
+        if any(v["id"] == voice for v in voices):
+            return e, voice
+        # Accept the voice name too (handy for ElevenLabs, whose ids are not readable).
+        by_name = [v for v in voices if v["name"].strip().lower() == voice.strip().lower()]
+        if len(by_name) == 1:
+            return e, by_name[0]["id"]
+        if len(by_name) > 1:
+            die(f"{e['name']} has {len(by_name)} voices named '{voice}'. Use the id instead: "
+                + ", ".join(v["id"] for v in by_name))
+        names = ", ".join(f"{v['name']} ({v['id']})" if v["name"] != v["id"] else v["id"] for v in voices)
+        die(f"{e['name']} has no voice '{voice}'. Available: {names or 'none'}")
 
 
 def studio_jobs_file(cache_dir):
     return cache_dir / "studio-jobs.json"
 
 
-def narrate_step_studio(step_dir, lesson_dir, lesson, s, cache_dir, studio, args):
-    files = {**lesson.get("files", {})}
-    step_json_path = step_dir / "step.json"
-    meta = json.loads(step_json_path.read_text()) if step_json_path.exists() else {}
-    files.update(meta.get("files", {}))
-    vtt_path = step_dir / (files.get("subtitles") or "subtitles.vtt")
-    if not vtt_path.exists():
-        print(f"  {step_dir.name}: no subtitles, skipped")
+def narrate_step_studio(step_dir, lesson_dir, lesson, s, cache_dir, studio, args, lang):
+    found = read_step(step_dir, lesson, lang)
+    if not found:
         return False
-    cues = parse_vtt(vtt_path.read_text(encoding="utf-8"))
-    if not cues:
-        print(f"  {step_dir.name}: subtitles contain no cues, skipped")
-        return False
+    step_json_path, meta, vtt_path, cues = found
+    multi = bool(lesson.get("languages"))
 
     # narration.json's lexicon and [[shown|spoken]] are applied here; the studio
     # then applies its own pronunciation list on top.
@@ -412,8 +451,11 @@ def narrate_step_studio(step_dir, lesson_dir, lesson, s, cache_dir, studio, args
         jobs = json.loads(jobs_path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         jobs = {}
-    key = f"{lesson_dir.name}/{step_dir.name}"
-    title = f"{lesson.get('title', lesson_dir.name)}, {meta.get('title', step_dir.name)}"
+    key = f"{lesson_dir.name}/{step_dir.name}" + (f"/{lang}" if multi else "")
+    step_title = meta.get("title", step_dir.name)
+    if isinstance(step_title, dict):
+        step_title = step_title.get(lang) or next(iter(step_title.values()), step_dir.name)
+    title = f"{lesson.get('title', lesson_dir.name)}, {step_title}" + (f" ({lang})" if multi else "")
     payload = {
         "id": jobs.get(key),
         "engine": s["model"], "voice": s["voice"], "voiceLabel": s.get("voiceLabel", ""),
@@ -441,11 +483,11 @@ def narrate_step_studio(step_dir, lesson_dir, lesson, s, cache_dir, studio, args
     if len(job["lines"]) != len(cues):
         die(f"the studio returned {len(job['lines'])} lines for {len(cues)} cues in {step_dir.name}")
 
-    output_name = s["output"]
+    audio_name, output_name = audio_target(lesson, meta, s, lang)
     audio = studio.call("GET", f"/files/{job['id']}/audio.mp3", raw=True, timeout=300)
     (step_dir / output_name).write_bytes(audio)
     timings = [[l["start"], l["end"]] for l in job["lines"]]
-    finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, job["result"]["duration"], output_name)
+    finish_step(step_json_path, meta, lesson, vtt_path, cues, timings, job["result"]["duration"], audio_name, output_name)
 
     if not s.get("keepOutputs", True):
         studio.call("DELETE", f"/api/outputs/{job['id']}")
@@ -462,6 +504,7 @@ def main():
     ap.add_argument("--config", help="path to narration.json")
     ap.add_argument("--dry-run", action="store_true", help="show what would be generated, do not call the TTS engine")
     ap.add_argument("--force", action="store_true", help="regenerate every clip, ignoring the cache")
+    ap.add_argument("--lang", nargs="+", help="only these languages of a multilingual lesson (default: all)")
     args = ap.parse_args()
 
     lesson_dir = Path(args.lesson).resolve()
@@ -472,7 +515,38 @@ def main():
 
     config_path = find_config(lesson_dir, args.config)
     config = json.loads(config_path.read_text())
-    profile, s = resolve_settings(config, lesson, args.profile)
+
+    step_ids = lesson["steps"]
+    if args.steps:
+        unknown = [x for x in args.steps if x not in step_ids]
+        if unknown:
+            die(f"unknown step(s): {', '.join(unknown)}")
+        step_ids = [x for x in step_ids if x in args.steps]
+
+    # A multilingual lesson is narrated once per language. A single-language
+    # lesson still gets its language from "lang" (nl-BE -> nl), so the
+    # languages section of narration.json applies to it too.
+    langs = lesson.get("languages") or []
+    if langs:
+        todo = args.lang or langs
+        unknown = [x for x in todo if x not in langs]
+        if unknown:
+            die(f"the lesson has no language {', '.join(unknown)}. Its languages: {', '.join(langs)}")
+    else:
+        if args.lang:
+            die("this lesson has no \"languages\"; add one with tools/add-language.py")
+        todo = [(lesson.get("lang") or "").split("-")[0].lower() or None]
+
+    done = 0
+    for lang in todo:
+        done += narrate_language(lesson_dir, lesson, config, config_path, step_ids, lang, args)
+    if not args.dry_run:
+        print(f"Done: {done} step(s) narrated.")
+
+
+def narrate_language(lesson_dir, lesson, config, config_path, step_ids, lang, args) -> int:
+    multi = bool(lesson.get("languages"))
+    profile, s = resolve_settings(config, lesson, args.profile, lang)
 
     use_studio = s["engine"] == "studio"
     if not args.dry_run and not use_studio and not shutil.which("ffmpeg"):
@@ -483,7 +557,7 @@ def main():
             if not s.get(k):
                 die(f"the studio profile needs \"{k}\" (model is the studio's model id, for example babbeldoos)")
         studio = Studio(s)
-        e = studio.check(s["model"], s["voice"])
+        e, s["voice"] = studio.check(s["model"], s["voice"])
         s.setdefault("voiceLabel", next((v["name"] for v in e["voices"] if v["id"] == s["voice"]), s["voice"]))
         if args.force:
             print("note: --force has no effect with the studio; use Generate again in the studio for a new take")
@@ -494,25 +568,19 @@ def main():
     cache_dir = cache_dir / profile
     cache_dir.mkdir(parents=True, exist_ok=True)
 
-    step_ids = lesson["steps"]
-    if args.steps:
-        unknown = [x for x in args.steps if x not in step_ids]
-        if unknown:
-            die(f"unknown step(s): {', '.join(unknown)}")
-        step_ids = [x for x in step_ids if x in args.steps]
-
     steps_dir = lesson_dir / lesson.get("stepsDir", "steps")
-    print(f"{lesson.get('title', lesson_dir.name)}  (profile: {profile}, voice: {s.get('voice', '-')})")
+    file_lang = lang if multi else None  # {lang} in file names only means something in a multilingual lesson
+    language = f"language: {lang}, " if multi else ""
+    print(f"{lesson.get('title', lesson_dir.name)}  ({language}profile: {profile}, voice: {s.get('voice', '-')})")
     done = 0
     for sid in step_ids:
         if use_studio:
-            ok = narrate_step_studio(steps_dir / sid, lesson_dir, lesson, s, cache_dir, studio, args)
+            ok = narrate_step_studio(steps_dir / sid, lesson_dir, lesson, s, cache_dir, studio, args, file_lang)
         else:
-            ok = narrate_step(steps_dir / sid, lesson, s, cache_dir, args)
+            ok = narrate_step(steps_dir / sid, lesson, s, cache_dir, args, file_lang)
         if ok:
             done += 1
-    if not args.dry_run:
-        print(f"Done: {done} step(s) narrated.")
+    return done
 
 
 if __name__ == "__main__":

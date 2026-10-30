@@ -10,6 +10,11 @@
     "summary": "A first MonoBehaviour in C#, and why Time.deltaTime matters."
   },
   {
+    "id": "csharp-to-js-basics",
+    "title": "Van C# naar JavaScript: basisconcepten",
+    "summary": "Scripts linken, variabelen, naamgeving, data types, operatoren, commentaar en strings: C#-code morpht naar JavaScript."
+  },
+  {
     "id": "js-arrays",
     "title": "JavaScript: arrays and loops",
     "summary": "Arrays, for...of and the console, with live console output."

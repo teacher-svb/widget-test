@@ -1,0 +1,14 @@
+{
+  "title": "Code in een apart bestand in C#",
+  "chapter": "JS linken",
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "C#",
+  "preview": null,
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "Utils.cs"
+  }
+}

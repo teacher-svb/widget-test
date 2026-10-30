@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.400 --> 00:05.107
+00:00.400 --> 00:05.313
 Een array is een geordende lijst van waarden, geschreven tussen vierkante haken.
 
 2
-00:05.107 --> 00:09.451
+00:05.313 --> 00:09.278
 length vertelt je hoeveel items erin zitten. Hier zijn dat er vier.
 
 3
-00:09.451 --> 00:14.658
+00:09.278 --> 00:13.594
 Items worden genummerd vanaf nul, dus scores nul is het eerste item.

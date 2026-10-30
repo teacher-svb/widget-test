@@ -107,7 +107,9 @@ Students can pause and edit the code at any time. The preview updates with their
 | `tabSize` | Indentation width in the editor |
 | `cps` | Default typing speed in characters per second |
 | `files` | Default file names inside each step folder. Set one to `null` to disable it for every step |
+| `transition` | Optional default transition for every step: `"typing"` (default) or `"morph"` |
 | `starterCode` | Optional code that is already in the editor before step 1 |
+| `languages`, `defaultLanguage` | Make the lesson multilingual, see [Multiple languages](#multiple-languages) |
 | `stepsDir` | Optional, defaults to `steps` |
 
 To use audio in every step, set `"audio": "audio.mp3"` in `files` and drop an `audio.mp3` in each step folder. The demo lessons have `"audio": null` and use the browser voice instead (see below).
@@ -128,10 +130,39 @@ To use audio in every step, set `"audio": "audio.mp3"` in `files` and drop an `a
 | `typing.toCue` | Typing is finished when this cue ends |
 | `typing.start` / `typing.end` | The same in seconds, if you prefer fixed times |
 | `typing.cps` | Typing speed when no end is given, overrides the lesson `cps` |
+| `transition` | `"typing"` (default), `"morph"` or `"fade"`, see below. Overrides the lesson `transition` |
+| `mode`, `languageLabel`, `preview` | Switch editor mode, header label or preview kind from this step on. A step without them keeps what the previous step used |
+| `chapter` | Groups steps in the step list under a chapter heading; only the current chapter is expanded. A step without it stays in the previous step's chapter |
+| `typing.<lang>` | Typing window for one language in a multilingual lesson, for example `"en": { "toCue": 5 }` |
 | `duration` | Only needed when there is no audio. Otherwise the step lasts as long as its audio file, or until the last subtitle ends |
 | `files` | Override file names for this step only, for example `{ "audio": "take2.mp3" }` |
 
 Use cue numbers rather than seconds. When the narration is regenerated the timings change, but "typing happens while sentences 2 to 4 are spoken" stays true.
+
+## Morphing between two versions
+
+With `"transition": "morph"` a step does not type its code. Instead the code morphs from the previous step to this one, like the Morph transition in PowerPoint: tokens that appear in both versions slide to their new place, removed tokens fade out and new tokens fade in. Afterwards the new tokens stay highlighted.
+
+Combined with `mode`, `languageLabel` and `preview` this shows one piece of code turning into another language. The lesson `csharp-to-js-basics` morphs C# code into JavaScript, for example in its "let and const" step:
+
+```json
+{
+  "title": "let and const in JavaScript",
+  "chapter": "Variabelen",
+  "transition": "morph",
+  "mode": "javascript",
+  "languageLabel": "JavaScript",
+  "preview": "console",
+  "typing": { "fromCue": 2 }
+}
+```
+
+- The `typing` window sets when the morph plays. Without an end (`toCue` or `end`) a morph takes 2 seconds.
+- `"transition": "fade"` crossfades to the new code without moving any tokens (1.2 seconds by default). Use it when the code changes to something unrelated, for example at the start of a new chapter.
+- During the morph the header shows both languages, for example `C# → JavaScript`. The editor switches to the new mode halfway.
+- Tokens are matched on their exact text, so keep names the same where you want them to travel (`age` stays `age`). Renamed tokens crossfade.
+- Typing speed applies to morphs too: 2x halves the morph, Instant skips it. With "reduce motion" turned on in the operating system, the morph is a crossfade without movement.
+- `files` only applies to its own step, so later steps in the new language also need `"files": { "code": "code.js" }`. `tools/new-step.py` copies that override for you.
 
 ## Subtitles
 
@@ -193,7 +224,7 @@ It needs Python 3.10 or newer and ffmpeg, nothing else.
 | `default` | Profile used when neither the command line nor the lesson picks one |
 | `settings` | Shared settings for all profiles |
 | `profiles` | Named engine setups, for example `chatterbox`, `piper`, `qwen-en` |
-| `engine` | `openai` (any OpenAI-style `/v1/audio/speech` server) or `command` (runs a program) |
+| `engine` | `openai` (any OpenAI-style `/v1/audio/speech` server), `command` (runs a program) or `studio` (Narration Studio, see below) |
 | `baseUrl`, `path`, `model`, `voice` | Server settings for the `openai` engine |
 | `extra` | Extra fields sent with every request, for example Chatterbox's `exaggeration` |
 | `apiKeyEnv` | Name of an environment variable holding an API key, if the server needs one |
@@ -203,6 +234,7 @@ It needs Python 3.10 or newer and ffmpeg, nothing else.
 | `loudnorm` | Normalize loudness so all steps play at the same volume |
 | `lexicon` | Words to pronounce differently, for example `"getElementById": "get element by id"` |
 | `cacheDir` | Where clips are cached, default `.narration-cache` next to `narration.json` |
+| `languages` | Settings per language, for example `{ "en": { "profile": "chatterbox-en", "lexicon": { ... } } }`. Applied on top of `settings`, below the profile. A single-language lesson uses the language of its `lang` (`nl-BE` uses `nl`) |
 
 A lesson can override any of these with a `narration` object in its `lesson.json`, for example a different profile or extra lexicon entries for that lesson:
 
@@ -212,7 +244,114 @@ A lesson can override any of these with a `narration` object in its `lesson.json
 
 Settings that change the sound (engine, voice, model, speed, `extra`) are part of the cache key, so changing them regenerates the clips. Changing the server address does not.
 
+### Using Narration Studio as the engine
+
+With `"engine": "studio"` the script hands each step to Narration Studio, which does the generation. You get the studio's models (Chatterbox, Babbeldoos, ElevenLabs, Piper), its cache and its pronunciation list, while the files are still written into your local lesson folder.
+
+```json
+"studio": {
+  "engine": "studio",
+  "baseUrl": "http://192.168.50.203:8090",
+  "model": "babbeldoos",
+  "voice": "syndias",
+  "params": { "style": "Narration", "strength": 1.0 }
+}
+```
+
+| Key | Meaning |
+|---|---|
+| `baseUrl` | address of the studio |
+| `model` | the studio's model id: `chatterbox`, `babbeldoos`, `elevenlabs`, `piper`, or one from its `engines.json` |
+| `voice` | voice id or voice name as the studio lists it. A name is handy for ElevenLabs, whose ids are not readable; when two voices share a name, use the id |
+| `params` | the model's settings, with the same names as in the studio (for example `exaggeration`, `style`, `strength`, `model_id`, `stability`) |
+| `keepOutputs` | `true` (default) keeps each step as an output in the studio's Library; `false` deletes it after downloading |
+| `leadIn`, `gap`, `tail`, `lexicon` | as for the other engines; the studio's own pronunciation list is applied as well |
+
+Each step keeps the same output in the studio between runs (remembered in `.narration-cache/<profile>/studio-jobs.json`). Unchanged sentences are not generated again, and a sentence you regenerated by hand in the studio keeps that take. `--force` does nothing with this engine; use **Generate again** in the studio instead. The script checks at the start that the model is ready and the voice exists, and lists the available voices when it does not.
+
+`python3 tools/narrate.py lessons/clicker-button --profile studio`
+
 See [docs/narration-setup.md](docs/narration-setup.md) for running Chatterbox Multilingual on the GPU, cloning your own voice, and Piper as a CPU draft voice.
+
+## Multiple languages
+
+Only what is language-specific needs a version per language: subtitles, audio and explainer. The code is shared.
+
+```
+steps/01-markup/
+  step.json
+  code.html             the same in every language
+  subtitles.nl.vtt
+  subtitles.en.vtt
+  audio.nl.mp3
+  audio.en.mp3
+  explainer.nl.md
+  explainer.en.md
+```
+
+In `lesson.json` you list the languages once and put `{lang}` in the file names:
+
+```json
+"languages": ["nl", "en"],
+"defaultLanguage": "nl",
+"files": {
+  "code": "code.html",
+  "subtitles": "subtitles.{lang}.vtt",
+  "audio": "audio.{lang}.mp3",
+  "explainer": "explainer.{lang}.md"
+}
+```
+
+Lessons without `languages` keep working exactly as before.
+
+### Translate cue by cue
+
+Typing uses cue numbers, so translate sentence by sentence and keep the same number of cues. Then one `typing` setting works for every language. When a translation really needs a different split, override it for that language:
+
+```json
+"typing": { "fromCue": 2, "toCue": 4, "en": { "fromCue": 2, "toCue": 5 } }
+```
+
+Translating cue by cue has a bonus: the player can show English subtitles over Dutch audio, using the Dutch timings. That helps exchange students before any English audio is recorded. If the cue counts of the two languages differ, the player shows the audio's own subtitles instead.
+
+Step titles and chapters can be translated too: `"title": { "nl": "De opmaak", "en": "The markup" }`.
+
+### In the player
+
+A multilingual lesson gets two menus in the controls:
+
+- **Audio**: the language of the narration, and with it the timing of every step
+- **Subtitles**: the language of the subtitles, the explainer and the step titles, or Off
+
+Both start in the browser's language when the lesson has it, otherwise in `defaultLanguage`, and the viewer's choice is remembered. When embedding: `CodePlayer.mount(el, url, { language: 'en', subtitleLanguage: 'nl' })` (`subtitleLanguage` can also be `'off'`).
+
+A step that is missing a translation (no subtitles and no audio in that language) falls back to the default language, so a half-translated lesson still plays. A step with subtitles but no audio in a language is read by the browser voice in that language.
+
+### Adding a language
+
+```bash
+python3 tools/add-language.py lessons/clicker-button en
+```
+
+This copies every step's subtitles and explainer of the default language to the new language, with the same cues, ready to translate in place. Step titles and chapters become `{ "nl": ..., "en": ... }`. A lesson without `languages` is converted first: its files are renamed to the `{lang}` form (`subtitles.vtt` becomes `subtitles.nl.vtt`, `audio.mp3` becomes `audio.nl.mp3`), with the language taken from `lang` or `--from nl`.
+
+### Narration per language
+
+```bash
+python3 tools/narrate.py lessons/clicker-button             # every language
+python3 tools/narrate.py lessons/clicker-button --lang en   # only English
+```
+
+Each language can use its own profile and lexicon. Babbeldoos is Dutch only, so English goes through ElevenLabs or Chatterbox. Set it for all lessons in `narration.json`:
+
+```json
+"languages": {
+  "nl": { "lexicon": { "console.log": "console punt log" } },
+  "en": { "profile": "elevenlabs-en", "lexicon": { "console.log": "console dot log" } }
+}
+```
+
+or for one lesson in its `lesson.json`: `"narration": { "nl": { "profile": "studio-flemish" }, "en": { "profile": "studio-en" } }`. The profile is taken from `--profile`, then the lesson, then `narration.json`'s `languages`, then `default`.
 
 ## Explainer
 

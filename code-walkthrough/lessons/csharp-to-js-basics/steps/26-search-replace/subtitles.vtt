@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:05.860
+indexOf is hoofdlettergevoelig: Wereld met een hoofdletter vindt hij niet, dus min één.
+
+2
+00:05.860 --> 00:13.420
+replace vervangt alleen het eerste stuk dat hij vindt. Met [[/la/g|slash la slash g]] vervang je ze allemaal.
+
+3
+00:13.420 --> 00:18.040
+repeat herhaalt een string, en toLowerCase zet alles in kleine letters.

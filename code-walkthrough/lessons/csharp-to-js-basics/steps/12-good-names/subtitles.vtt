@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.180
+Met duidelijke namen leest de code als een zin.
+
+2
+00:04.180 --> 00:11.740
+Namen van meerdere woorden schrijf je in lowerCamelCase: het eerste woord klein, elk volgend woord met een hoofdletter.
+
+3
+00:11.740 --> 00:18.880
+In C# gebruik je PascalCase voor methodes en properties. In JavaScript schrijf je bijna alles in lowerCamelCase.

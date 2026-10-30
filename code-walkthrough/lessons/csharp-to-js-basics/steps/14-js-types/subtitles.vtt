@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.900
+JavaScript heeft minder types.
+
+2
+00:02.900 --> 00:10.040
+Er is één type number voor gehele getallen en kommagetallen, en geen apart type voor één teken.
+
+3
+00:10.040 --> 00:16.760
+Een variabele zonder waarde is undefined. Dat lijkt op null, maar null zet je zelf, bewust.
+
+4
+00:16.760 --> 00:21.800
+Objecten en arrays zijn complexe types. Die komen in een later hoofdstuk.

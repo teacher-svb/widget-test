@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.400 --> 00:04.421
+00:00.400 --> 00:03.665
 Om alle scores op te tellen, beginnen we met een totaal van nul.
 
 2
-00:04.421 --> 00:10.003
+00:03.665 --> 00:09.992
 Een for of-lus geeft ons elk item om de beurt. We tellen elke score op bij het totaal.
 
 3
-00:10.003 --> 00:16.462
+00:09.992 --> 00:15.909
 Na de lus loggen we het totaal en het gemiddelde: het totaal gedeeld door het aantal scores.

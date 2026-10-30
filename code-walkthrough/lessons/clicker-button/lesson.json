@@ -3,7 +3,7 @@
   "languageLabel": "HTML / CSS / JS",
   "mode": "htmlmixed",
   "preview": "html",
-  "lang": "en-US",
+  "lang": "nl",
   "tabSize": 2,
   "cps": 16,
   "files": {
@@ -19,3 +19,4 @@
     "04-polish"
   ]
 }
+

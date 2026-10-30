@@ -1,0 +1,14 @@
+{
+  "title": "Operatoren in C#",
+  "chapter": "Expressies en operatoren",
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "C#",
+  "preview": null,
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "code.cs"
+  }
+}

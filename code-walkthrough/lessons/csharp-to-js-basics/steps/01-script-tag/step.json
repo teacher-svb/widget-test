@@ -1,0 +1,14 @@
+{
+  "title": "Een script aan de pagina koppelen",
+  "chapter": "JS linken",
+  "mode": "htmlmixed",
+  "languageLabel": "index.html",
+  "preview": null,
+  "typing": {
+    "fromCue": 2,
+    "toCue": 3
+  },
+  "files": {
+    "code": "index.html"
+  }
+}

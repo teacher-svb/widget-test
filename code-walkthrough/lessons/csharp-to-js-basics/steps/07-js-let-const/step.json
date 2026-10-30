@@ -1,0 +1,11 @@
+{
+  "title": "let en const in JavaScript",
+  "chapter": "Variabelen",
+  "transition": "morph",
+  "mode": "javascript",
+  "languageLabel": "JavaScript",
+  "preview": "console",
+  "typing": {
+    "fromCue": 2
+  }
+}

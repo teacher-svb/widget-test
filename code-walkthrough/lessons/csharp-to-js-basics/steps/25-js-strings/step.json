@@ -1,0 +1,11 @@
+{
+  "title": "Stringmethodes in JavaScript",
+  "chapter": "Strings",
+  "transition": "morph",
+  "mode": "javascript",
+  "languageLabel": "JavaScript",
+  "preview": "console",
+  "typing": {
+    "fromCue": 1
+  }
+}

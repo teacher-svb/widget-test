@@ -1,0 +1,14 @@
+{
+  "title": "Stringmethodes in C#",
+  "chapter": "Strings",
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "C#",
+  "preview": null,
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "code.cs"
+  }
+}

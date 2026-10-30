@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:05.020
+Een naam mag letters, cijfers, een dollarteken en een underscore bevatten.
+
+2
+00:05.020 --> 00:10.480
+Een naam mag niet met een cijfer beginnen, en een koppelteken mag niet.
+
+3
+00:10.480 --> 00:15.940
+Gereserveerde woorden zoals let, class of return kan je niet als naam gebruiken.
+
+4
+00:15.940 --> 00:20.980
+Hoofdletters tellen mee: apple en [[AppLE|apple met hoofdletters]] zijn twee verschillende variabelen.

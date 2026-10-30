@@ -475,9 +475,7 @@
   padding: 0;
   display: grid;
   gap: 2px;
-  counter-reset: cpstep;
 }
-.cp-steps li { counter-increment: cpstep; }
 .cp-steps button {
   width: 100%;
   display: flex;
@@ -494,7 +492,7 @@
   cursor: pointer;
 }
 .cp-steps button::before {
-  content: counter(cpstep);
+  content: attr(data-n);
   flex: none;
   width: 1.6em;
   font-family: var(--cp-font-mono);
@@ -515,6 +513,20 @@
   font-weight: 600;
 }
 .cp-steps .cp-current button::before { color: var(--cp-accent); }
+
+/* Chapter headings group the steps; only the current chapter is expanded */
+.cp-steps .cp-chapter button {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.cp-steps .cp-chapter:first-child button { margin-top: 0; }
+.cp-steps .cp-chapter button::before { content: "▸"; font-family: var(--cp-font-body); }
+.cp-steps .cp-chapter.cp-current button { background: none; color: var(--cp-accent); }
+.cp-steps .cp-chapter.cp-current button::before { content: "▾"; }
+.cp-marker-chapter { top: -5px; height: 16px; width: 3px; margin-left: -1.5px; background: var(--cp-fg); }
 
 .cp-md { max-width: 62ch; }
 .cp-md > :first-child { margin-top: 0; }
@@ -607,6 +619,29 @@
 .cp-is-playing .cp-caret { animation: none; }
 @keyframes cp-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .cp-caret { animation: none; } }
+
+/* Morph transition: the editor text hides and token spans glide on top */
+.cp-morph {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+  font-family: var(--cp-font-mono);
+  font-size: 13.5px;
+  color: var(--cp-fg);
+  font-variant-ligatures: contextual;
+}
+.cp-morph span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: pre;
+  will-change: transform, opacity;
+}
+.cp-morphing .CodeMirror-line,
+.cp-morphing .CodeMirror-cursors { visibility: hidden; }
+.cp-morphing .cp-textarea { color: transparent; }
 
 .cp button:focus-visible, .cp select:focus-visible {
   outline: 2px solid var(--cp-accent);

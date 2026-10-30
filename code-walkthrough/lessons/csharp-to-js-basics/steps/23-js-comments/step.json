@@ -1,0 +1,11 @@
+{
+  "title": "Commentaar in JavaScript",
+  "chapter": "Commentaar",
+  "transition": "morph",
+  "mode": "javascript",
+  "languageLabel": "JavaScript",
+  "preview": "console",
+  "typing": {
+    "fromCue": 1
+  }
+}

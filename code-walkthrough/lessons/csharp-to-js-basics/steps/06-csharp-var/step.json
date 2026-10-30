@@ -1,0 +1,11 @@
+{
+  "title": "C# het type laten afleiden",
+  "chapter": "Variabelen",
+  "transition": "morph",
+  "typing": {
+    "fromCue": 2
+  },
+  "files": {
+    "code": "code.cs"
+  }
+}

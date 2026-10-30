@@ -1,7 +1,79 @@
 {
-  "default": "studio",
+  "default": "studio-syndias-flemish",
+  "settings": {
+    "leadIn": 0.4,
+    "gap": 0.35,
+    "tail": 0.8,
+    "trimSilence": true,
+    "loudnorm": true,
+    "lexicon": {
+      "getElementById": "get element by id",
+      "addEventListener": "add event listener",
+      "textContent": "text content",
+      "MonoBehaviour": "mono behaviour",
+      "deltaTime": "delta time",
+      "C#": "C sharp",
+      "JS": "J S",
+      "js": "J S",
+      "HTML": "H T M L",
+      "src": "source",
+      "highScore": "high score",
+      "userName": "user name",
+      "lowerCamelCase": "lower camel case",
+      "PascalCase": "pascal case",
+      "UPPER_SNAKE_CASE": "upper snake case",
+      "typeof": "type of",
+      "TypeError": "type error",
+      "SyntaxError": "syntax error",
+      "NaN": "nan",
+      "parseInt": "parse int",
+      "toString": "to string",
+      "indexOf": "index of",
+      "Substring": "sub string",
+      "substring": "sub string",
+      "ToUpper": "to upper",
+      "toUpperCase": "to upper case",
+      "toLowerCase": "to lower case",
+      "++": "plus plus",
+      "Ctrl+/": "control slash"
+    }
+  },
+  "languages": {
+    "nl": {
+      "lexicon": {
+        "type=\"module\"": "type is module",
+        "index.html": "index punt H T M L",
+        "script.js": "script punt J S",
+        "utils.js": "utils punt J S",
+        "console.log": "console punt log",
+        "Console.WriteLine": "console punt write line",
+        "--": "min min",
+        "+=": "plus is",
+        "-=": "min is",
+        "*=": "maal is",
+        "/=": "gedeeld door is",
+        "**": "sterretje sterretje"
+      }
+    },
+    "en": {
+      "lexicon": {
+        "type=\"module\"": "type equals module",
+        "index.html": "index dot H T M L",
+        "script.js": "script dot J S",
+        "utils.js": "utils dot J S",
+        "console.log": "console dot log",
+        "Console.WriteLine": "console dot write line",
+        "--": "minus minus",
+        "+=": "plus equals",
+        "-=": "minus equals",
+        "*=": "times equals",
+        "/=": "divide equals",
+        "**": "star star"
+      }
+    }
+  },
   "profiles": {
-    "studio": {
+    "studio-syndias-flemish": {
       "engine": "studio",
       "baseUrl": "http://192.168.50.203:8090",
       "model": "babbeldoos",
@@ -11,7 +83,7 @@
         "strength": 1.0
       }
     },
-    "studio-eleven": {
+    "elevenlabs-syndias-flemish": {
       "engine": "studio",
       "baseUrl": "http://192.168.50.203:8090",
       "model": "elevenlabs",
@@ -19,6 +91,20 @@
       "params": {
         "model_id": "eleven_multilingual_v2",
         "language_code": "nl",
+        "stability": 0.6,
+        "similarity_boost": 0.75,
+        "style": 0,
+        "speed": 1.0
+      }
+    },
+    "elevenlabs-chris-english": {
+      "engine": "studio",
+      "baseUrl": "http://192.168.50.203:8090",
+      "model": "elevenlabs",
+      "voice": "iP95p4xoKVk53GoZ742B",
+      "params": {
+        "model_id": "eleven_multilingual_v2",
+        "language_code": "en",
         "stability": 0.6,
         "similarity_boost": 0.75,
         "style": 0,

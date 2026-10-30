@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.600
+Aanhalingstekens in een string kan je op twee manieren tonen.
+
+2
+00:04.600 --> 00:10.480
+Ofwel kies je het andere soort aanhalingstekens, ofwel zet je er een backslash voor.
+
+3
+00:10.480 --> 00:18.880
+Een backslash maakt van het volgende teken een speciaal teken: [[\n|backslash n]] is een nieuwe regel, [[\t|backslash t]] een tab.
+
+4
+00:18.880 --> 00:27.280
+Wil je een echte backslash, dan schrijf je er twee. Met backticks mag een string ook over meerdere regels gaan.

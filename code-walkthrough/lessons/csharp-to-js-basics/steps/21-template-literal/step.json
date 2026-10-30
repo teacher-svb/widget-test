@@ -1,0 +1,8 @@
+{
+  "title": "Template literals in plaats van +",
+  "chapter": "Expressies en operatoren",
+  "transition": "morph",
+  "typing": {
+    "fromCue": 1
+  }
+}

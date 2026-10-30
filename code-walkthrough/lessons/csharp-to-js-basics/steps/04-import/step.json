@@ -1,0 +1,12 @@
+{
+  "title": "Importeren in een andere module",
+  "chapter": "JS linken",
+  "transition": "morph",
+  "languageLabel": "js/script.js",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "script.js"
+  }
+}
