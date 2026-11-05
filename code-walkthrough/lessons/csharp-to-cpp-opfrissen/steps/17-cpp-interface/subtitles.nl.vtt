@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.400 --> 00:06.329
+00:00.400 --> 00:05.970
 C++ kent geen interface. Een klasse met enkel pure virtual methodes speelt die rol.
 
 2
-00:06.329 --> 00:13.757
+00:05.970 --> 00:12.052
 [[= 0|is nul]] achter een methode maakt ze pure virtual: er is geen code, en een afgeleide klasse moet ze invullen.
 
 3
-00:13.757 --> 00:18.257
+00:12.052 --> 00:16.166
 Meerdere interfaces overerven is veilig: ze hebben geen velden.

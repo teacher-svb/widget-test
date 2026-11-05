@@ -1,17 +1,17 @@
 WEBVTT
 
 1
-00:00.400 --> 00:06.400
+00:00.400 --> 00:06.032
 C++ compileert elk cpp-bestand apart. Daarom splits je een klasse in twee bestanden.
 
 2
-00:06.400 --> 00:12.686
+00:06.032 --> 00:12.077
 De header, met de extensie [[.h|punt h]], zegt wat de klasse is: enkel de declaraties, zonder code.
 
 3
-00:12.686 --> 00:19.257
+00:12.077 --> 00:17.783
 public en private zijn blokken met een dubbele punt, en de klasse eindigt met een puntkomma.
 
 4
-00:19.257 --> 00:23.829
+00:17.783 --> 00:21.912
 Met include plak je een andere header letterlijk in dit bestand.

@@ -1,9 +1,9 @@
 WEBVTT
 
 1
-00:00.400 --> 00:06.400
+00:00.400 --> 00:05.841
 In C# staat een klasse in één bestand: de velden en de methodes, met hun code erbij.
 
 2
-00:06.400 --> 00:12.614
+00:05.841 --> 00:11.122
 De compiler leest het hele project in één keer. Elk bestand kent dus alle andere types.

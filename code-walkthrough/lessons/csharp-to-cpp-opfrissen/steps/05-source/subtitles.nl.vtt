@@ -1,17 +1,17 @@
 WEBVTT
 
 1
-00:00.400 --> 00:05.829
+00:00.400 --> 00:05.083
 Het cpp-bestand zegt wat de klasse doet: hier staat de code van de methodes.
 
 2
-00:05.829 --> 00:11.114
+00:05.083 --> 00:09.129
 Elke methode krijgt de naam van de klasse ervoor, met twee dubbele punten.
 
 3
-00:11.114 --> 00:18.757
+00:09.129 --> 00:16.027
 World.h includen we hier wel: we roepen een methode van World op, en dan moet de compiler de inhoud kennen.
 
 4
-00:18.757 --> 00:25.543
+00:16.027 --> 00:22.906
 Vuistregel: forward declareer in de header wat kan, include in het cpp-bestand wat je gebruikt.

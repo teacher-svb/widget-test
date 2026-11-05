@@ -1,17 +1,17 @@
 WEBVTT
 
 1
-00:00.400 --> 00:04.471
+00:00.400 --> 00:05.081
 In C++ heten ze hetzelfde, maar override staat achteraan.
 
 2
-00:04.471 --> 00:12.829
+00:05.081 --> 00:11.414
 Zonder virtual kiest de compiler de methode op basis van het type van de pointer. Dan loopt stil de verkeerde Update.
 
 3
-00:12.829 --> 00:21.114
+00:11.414 --> 00:17.791
 override is in C++ optioneel, maar zet het er altijd bij. Dan controleert de compiler dat je echt iets overschrijft.
 
 4
-00:21.114 --> 00:27.971
+00:17.791 --> 00:23.129
 Een klasse met virtuele methodes krijgt ook een virtuele destructor, met een tilde voor de naam.

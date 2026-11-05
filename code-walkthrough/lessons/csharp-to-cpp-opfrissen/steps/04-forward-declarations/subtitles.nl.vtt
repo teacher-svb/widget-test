@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.400 --> 00:06.543
+00:00.400 --> 00:05.298
 Voor een referentie of een pointer heeft de compiler enkel de naam van het type nodig.
 
 2
-00:06.543 --> 00:12.257
+00:05.298 --> 00:10.140
 Daarom vervangen we de includes van Crate en World door een forward declaration.
 
 3
-00:12.257 --> 00:18.614
+00:10.140 --> 00:15.424
 Dat compileert sneller, en het doorbreekt cirkels tussen headers die elkaar nodig hebben.

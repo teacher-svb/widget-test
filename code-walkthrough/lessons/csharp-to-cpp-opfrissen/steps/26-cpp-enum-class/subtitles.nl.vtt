@@ -1,13 +1,13 @@
 WEBVTT
 
 1
-00:00.400 --> 00:02.971
+00:00.400 --> 00:03.116
 In C++ gebruik je altijd enum class.
 
 2
-00:02.971 --> 00:06.900
+00:03.116 --> 00:05.788
 Ook daar staat de naam ervoor, met twee dubbele punten.
 
 3
-00:06.900 --> 00:14.114
+00:05.788 --> 00:12.065
 Een enum class zet niet stil om naar int. Wil je het getal, dan zeg je dat expliciet met static_cast.

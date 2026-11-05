@@ -1,17 +1,17 @@
 WEBVTT
 
 1
-00:00.400 --> 00:06.757
+00:00.400 --> 00:06.469
 In C++ is er geen garbage collector. Een unique_ptr is de enige eigenaar van zijn object.
 
 2
-00:06.757 --> 00:09.686
+00:06.469 --> 00:08.993
 make_unique maakt het object, zonder new.
 
 3
-00:09.686 --> 00:13.329
+00:08.993 --> 00:12.035
 Kopiëren kan niet, enkel verplaatsen met std::move.
 
 4
-00:13.329 --> 00:19.900
+00:12.035 --> 00:17.939
 Daarna is de PausedState vernietigd, is pending leeg, en is state eigenaar van de IdleState.

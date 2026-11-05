@@ -1,21 +1,21 @@
 WEBVTT
 
 1
-00:00.400 --> 00:04.614
+00:00.400 --> 00:04.069
 In C++ zeg je zelf of je een adres of een object doorgeeft.
 
 2
-00:04.614 --> 00:09.543
+00:04.069 --> 00:08.776
 Een ampersand voor een naam geeft het adres: van object naar pointer.
 
 3
-00:09.543 --> 00:17.329
+00:08.776 --> 00:14.989
 Een sterretje voor een pointer geeft het object erachter. Met de pijl roep je een methode op via een pointer.
 
 4
-00:17.329 --> 00:23.543
+00:14.989 --> 00:20.294
 Twee adressen vergelijken test of het hetzelfde object is, zoals ReferenceEquals in C#.
 
 5
-00:23.543 --> 00:29.257
+00:20.294 --> 00:26.659
 this is in C++ een pointer. Een methode die een referentie vraagt, krijgt [[*this|sterretje this]].

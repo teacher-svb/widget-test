@@ -1,9 +1,9 @@
 WEBVTT
 
 1
-00:00.400 --> 00:07.829
+00:00.400 --> 00:06.094
 Een header kan via twee wegen in hetzelfde cpp-bestand terechtkomen. Dan krijg je redefinition of class.
 
 2
-00:07.829 --> 00:12.971
+00:06.094 --> 00:09.863
 [[#pragma once|pragma once]] bovenaan zorgt dat de header maar één keer ingelezen wordt.
