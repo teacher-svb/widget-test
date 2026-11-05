@@ -395,6 +395,30 @@ Load the CodeMirror modes your lesson needs (`htmlmixed` also needs `xml`, `java
 
 `mount` returns a promise. After mounting, `element.codePlayer` exposes `play()`, `pause()`, `seek(seconds)` and `step(index)`.
 
+### In an iframe: embed.html
+
+`embed.html` shows only the player, without the page title and lesson picker, for use in an iframe (an LMS, another site, GitBook):
+
+```html
+<iframe src="https://your-host/code-walkthrough/embed.html?lesson=clicker-button"
+        style="width: 100%; height: 1120px; border: 0"></iframe>
+```
+
+| Parameter | Meaning |
+|---|---|
+| `lesson` | Lesson folder name (required). `embed.html#<lesson-id>` also works |
+| `lang` | Audio language of a multilingual lesson |
+| `sub` | Subtitle language, or `off` |
+| `typing` | `1`, `2` or `instant` |
+| `pause` | `1` to pause after each step |
+| `theme` | `light` or `dark`. Default: follow the system |
+
+When the content column is narrower than 900px the player stacks the explainer under the editor, at a fixed height. The page reports its height to the parent window with GitBook's `@webframe.resize` message. Other hosts ignore that message, so give the iframe a fixed height there (about 1120px when stacked).
+
+### In GitBook
+
+GitBook pages can't run your own scripts, so the player goes in through a custom block: a small GitBook integration that renders `embed.html` in a frame and gives editors a lesson picker. See [../gitbook-integration/README.md](../gitbook-integration/README.md).
+
 ## Keyboard
 
 | Key | Action |

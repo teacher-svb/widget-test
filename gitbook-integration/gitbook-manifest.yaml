@@ -1,0 +1,30 @@
+name: code-walkthrough
+title: Code Walkthrough
+description: Embed narrated code walkthrough lessons (typing editor, subtitles, live preview) in GitBook pages.
+script: ./src/index.tsx
+# icon: ./assets/icon.png
+scopes: []
+# Set to your GitBook organization's ID or subdomain before publishing.
+organization: YOUR-ORGANIZATION
+# private: only your organization can install it. "unlisted" and "public" also exist.
+visibility: private
+
+configurations:
+  account:
+    properties:
+      player_url:
+        type: string
+        title: Player URL
+        description: Folder where code-walkthrough is hosted, ending in /
+    required:
+      - player_url
+
+blocks:
+  - id: walkthrough
+    title: Code walkthrough
+    description: A narrated code lesson with a typing editor and live preview.
+    # Pasting a link that matches one of these turns it into the block.
+    # Replace with the address where the player is hosted.
+    urlUnfurl:
+      - https://YOUR-HOST/code-walkthrough/embed.html
+      - https://YOUR-HOST/code-walkthrough/index.html

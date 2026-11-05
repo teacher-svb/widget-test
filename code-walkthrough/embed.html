@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code Walkthrough</title>
+<!--
+  Player only, for embedding in an iframe (GitBook custom block, LMS, another site).
+
+  embed.html?lesson=<id>                lesson folder name in lessons/ (required)
+            &lang=en                    audio language (multilingual lessons)
+            &sub=nl | off               subtitle language
+            &typing=1 | 2 | instant     typing speed
+            &pause=1                    pause after each step
+            &theme=light | dark         force a theme (default: follow the system)
+
+  The page reports its height to the parent with the GitBook webframe message
+  ({ action: { action: '@webframe.resize', size: { aspectRatio, height } } }),
+  so a GitBook block grows and shrinks with the player. Other hosts ignore it.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="player/player.css">
+<style>
+  /* The frame's height follows the content, so nothing may depend on the
+     viewport height (58vh would grow with every resize). */
+  :root { --cp-editor-height: 400px; }
+  html, body { margin: 0; }
+  body {
+    background: var(--cp-bg);
+    color: var(--cp-fg);
+    font-family: var(--cp-font-body);
+  }
+  #player { padding: 2px; }
+  /* Stacked layout (GitBook's content column is narrower than 900px): give the
+     explainer a fixed height so the frame does not jump between steps. */
+  @media (max-width: 899px) {
+    .cp-side { height: 440px; }
+    .cp-panel-explainer { overflow: auto; }
+    .cp-frame { height: auto; flex: 1; }
+  }
+</style>
+</head>
+<body>
+<div id="player"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="player/player.js"></script>
+<script>
+(function () {
+  var params = new URLSearchParams(location.search);
+  var root = document.getElementById('player');
+
+  // Also accept embed.html#<lesson-id>, like index.html.
+  var lesson = params.get('lesson') || location.hash.slice(1);
+
+  var theme = params.get('theme');
+  if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme);
+
+  function post(action) {
+    if (window.parent === window) return;
+    window.parent.postMessage({ action: action }, '*');
+  }
+
+  // Report the height to GitBook's webframe whenever the layout changes.
+  // Only after the lesson has mounted: the short "Loading…" state would
+  // collapse the frame and then make it jump back.
+  var lastHeight = 0;
+  function reportSize() {
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    var w = document.documentElement.clientWidth;
+    if (!h || !w || Math.abs(h - lastHeight) < 2) return;
+    lastHeight = h;
+    post({ action: '@webframe.resize', size: { aspectRatio: w / h, height: h } });
+  }
+  function ready() {
+    post({ action: '@webframe.ready' });
+    reportSize();
+    if (typeof ResizeObserver === 'function') {
+      new ResizeObserver(reportSize).observe(document.body);
+    } else {
+      window.addEventListener('resize', reportSize);
+    }
+  }
+
+  // Lesson ids are folder names. Refuse anything else, so the URL cannot point
+  // the player at another path or another origin.
+  if (!/^[a-z0-9][a-z0-9_-]*$/i.test(lesson || '')) {
+    root.innerHTML = '<div class="cp-error"><strong>No lesson selected.</strong><br>' +
+      'Add <code>?lesson=&lt;lesson-id&gt;</code> to the URL, for example <code>embed.html?lesson=clicker-button</code>.</div>';
+    ready();
+    return;
+  }
+
+  var options = {};
+  if (params.get('lang')) options.language = params.get('lang');
+  if (params.get('sub')) options.subtitleLanguage = params.get('sub');
+  var typing = params.get('typing');
+  if (typing === '1' || typing === '2') options.typingSpeed = Number(typing);
+  if (typing === 'instant') options.typingSpeed = 'instant';
+  if (params.has('pause')) options.pauseAfterStep = params.get('pause') !== '0';
+
+  CodePlayer.mount(root, 'lessons/' + lesson + '/', options)
+    .catch(function () { /* the player shows its own error */ })
+    .then(ready);
+})();
+</script>
+</body>
+</html>
