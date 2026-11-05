@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.757
+CMake beschrijft hoe het project gebouwd wordt.
+
+2
+00:03.757 --> 00:10.614
+Alles behalve main zit in een library. Het programma en de tests linken allebei met die library.
+
+3
+00:10.614 --> 00:16.114
+PUBLIC raylib betekent: wie [[demo_lib|demo lib]] linkt, krijgt raylib er automatisch bij.
+
+4
+00:16.114 --> 00:23.186
+Voeg elk nieuw cpp-bestand toe aan add_library. Anders krijg je undefined reference bij het linken.

@@ -1,0 +1,14 @@
+{
+  "title": {
+    "nl": "unique_ptr en std::move"
+  },
+  "chapter": {
+    "nl": "Eigenaarschap met unique_ptr"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "C++",
+  "typing": {
+    "fromCue": 1
+  }
+}

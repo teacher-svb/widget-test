@@ -1,0 +1,16 @@
+{
+  "title": {
+    "nl": "De implementatie in de .cpp"
+  },
+  "chapter": {
+    "nl": "Header en source"
+  },
+  "transition": "morph",
+  "languageLabel": "GripperComponent.cpp",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "GripperComponent.cpp"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "Een test in Catch2"
+  },
+  "chapter": {
+    "nl": "Tests met Catch2"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "CellTests.cpp",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "CellTests.cpp"
+  }
+}

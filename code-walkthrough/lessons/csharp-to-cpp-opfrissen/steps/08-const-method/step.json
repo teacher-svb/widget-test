@@ -1,0 +1,16 @@
+{
+  "title": {
+    "nl": "const methodes en beginwaarden"
+  },
+  "chapter": {
+    "nl": "Constructors en const"
+  },
+  "languageLabel": "GripperComponent.cpp",
+  "typing": {
+    "fromCue": 1,
+    "toCue": 1
+  },
+  "files": {
+    "code": "GripperComponent.cpp"
+  }
+}

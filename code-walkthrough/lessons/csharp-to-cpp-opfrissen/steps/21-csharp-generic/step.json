@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "Een generieke methode in C#"
+  },
+  "chapter": {
+    "nl": "Templates en dynamic_cast"
+  },
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "C#",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "code.cs"
+  }
+}

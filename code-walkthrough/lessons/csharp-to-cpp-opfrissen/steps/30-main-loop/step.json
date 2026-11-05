@@ -1,0 +1,16 @@
+{
+  "title": {
+    "nl": "Update en draw"
+  },
+  "chapter": {
+    "nl": "De raylib game loop"
+  },
+  "languageLabel": "main.cpp",
+  "typing": {
+    "fromCue": 1,
+    "toCue": 3
+  },
+  "files": {
+    "code": "main.cpp"
+  }
+}

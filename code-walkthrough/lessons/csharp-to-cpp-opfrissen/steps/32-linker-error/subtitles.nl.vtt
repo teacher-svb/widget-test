@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.971
+Nog een klassieke oorzaak van undefined reference.
+
+2
+00:03.971 --> 00:13.543
+Hier staat Update zonder de naam van de klasse ervoor. Dat is een losse functie, en de methode van SensorComponent blijft zonder code.

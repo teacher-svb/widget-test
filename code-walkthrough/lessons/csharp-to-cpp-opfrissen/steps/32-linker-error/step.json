@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "undefined reference"
+  },
+  "chapter": {
+    "nl": "CMake en de linker"
+  },
+  "transition": "fade",
+  "mode": "text/x-c++src",
+  "languageLabel": "SensorComponent.cpp",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "SensorComponent.cpp"
+  }
+}

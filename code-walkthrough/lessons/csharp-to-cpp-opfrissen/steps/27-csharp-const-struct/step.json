@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "const en struct in C#"
+  },
+  "chapter": {
+    "nl": "Constanten en struct"
+  },
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "C#",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "code.cs"
+  }
+}

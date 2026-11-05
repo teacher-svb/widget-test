@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.400
+In C++ gebruiken we Catch2.
+
+2
+00:02.400 --> 00:07.114
+[[TEST_CASE|test case]] krijgt een beschrijving, en tags tussen vierkante haken.
+
+3
+00:07.114 --> 00:13.900
+REQUIRE stopt de test bij de eerste fout, zoals Assert. CHECK gaat verder en meldt alle fouten.
+
+4
+00:13.900 --> 00:19.971
+De tests gebruiken enkel publieke methodes. Ze beschrijven wat de cel doet, niet hoe.

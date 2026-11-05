@@ -1,0 +1,14 @@
+{
+  "title": {
+    "nl": "Interfaces in C++"
+  },
+  "chapter": {
+    "nl": "Overerving en virtual"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "C++",
+  "typing": {
+    "fromCue": 1
+  }
+}

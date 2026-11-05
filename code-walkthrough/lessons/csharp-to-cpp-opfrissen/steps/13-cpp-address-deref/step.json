@@ -1,0 +1,14 @@
+{
+  "title": {
+    "nl": "&, * en -> in C++"
+  },
+  "chapter": {
+    "nl": "Waarde, referentie, pointer"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "C++",
+  "typing": {
+    "fromCue": 2
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "Een test in MSTest"
+  },
+  "chapter": {
+    "nl": "Tests met Catch2"
+  },
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "CellTests.cs",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "CellTests.cs"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "Een constructor in C#"
+  },
+  "chapter": {
+    "nl": "Constructors en const"
+  },
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "GripperComponent.cs",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "GripperComponent.cs"
+  }
+}

@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.543
+In C++ wordt dat een template.
+
+2
+00:02.543 --> 00:09.400
+De compiler maakt een aparte versie voor elk type T. Daarom staat de hele template in de header.
+
+3
+00:09.400 --> 00:14.971
+dynamic_cast is de C++-versie van as: een pointer naar het object, of nullptr.
+
+4
+00:14.971 --> 00:21.329
+[[const auto&|const auto referentie]] overloopt de lijst zonder kopieën. Een unique_ptr kopiëren kan trouwens niet.

@@ -1,0 +1,16 @@
+{
+  "title": {
+    "nl": "De methode van de klasse"
+  },
+  "chapter": {
+    "nl": "CMake en de linker"
+  },
+  "languageLabel": "SensorComponent.cpp",
+  "typing": {
+    "fromCue": 1,
+    "toCue": 1
+  },
+  "files": {
+    "code": "SensorComponent.cpp"
+  }
+}

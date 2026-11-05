@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.757
+In C++ is elk object een waarde, ook een class.
+
+2
+00:03.757 --> 00:08.043
+[[World b = a|world b is a]] maakt een volledige kopie. a verandert niet mee.
+
+3
+00:08.043 --> 00:14.186
+Daarom kies je in C++ bij elk veld en elke parameter zelf hoe je een object vasthoudt.

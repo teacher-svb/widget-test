@@ -1,0 +1,14 @@
+{
+  "title": {
+    "nl": "Templates en dynamic_cast"
+  },
+  "chapter": {
+    "nl": "Templates en dynamic_cast"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "C++",
+  "typing": {
+    "fromCue": 1
+  }
+}

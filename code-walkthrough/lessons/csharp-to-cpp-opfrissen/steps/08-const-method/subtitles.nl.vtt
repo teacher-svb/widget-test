@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.971
+const achter een methode belooft dat ze het object niet wijzigt.
+
+2
+00:04.971 --> 00:10.829
+Op een const object, of via een const referentie, roep je enkel const methodes op.
+
+3
+00:10.829 --> 00:19.971
+Geef velden in de header ook een beginwaarde, zoals nullptr voor een pointer. Zonder krijgt een pointer een willekeurige waarde.

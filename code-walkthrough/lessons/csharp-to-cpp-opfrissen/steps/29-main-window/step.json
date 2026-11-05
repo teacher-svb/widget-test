@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "Een venster openen"
+  },
+  "chapter": {
+    "nl": "De raylib game loop"
+  },
+  "transition": "fade",
+  "mode": "text/x-c++src",
+  "languageLabel": "main.cpp",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "main.cpp"
+  }
+}

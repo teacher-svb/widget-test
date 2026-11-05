@@ -1,0 +1,14 @@
+{
+  "title": {
+    "nl": "enum class in C++"
+  },
+  "chapter": {
+    "nl": "vector en enum class"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "C++",
+  "typing": {
+    "fromCue": 1
+  }
+}

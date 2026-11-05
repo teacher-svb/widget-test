@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.971
+Een waarde: het object zit erin, en verdwijnt mee.
+
+2
+00:03.971 --> 00:10.043
+Een referentie, met een ampersand: het object bestaat zeker, en het is nooit nullptr.
+
+3
+00:10.043 --> 00:15.971
+Een pointer, met een sterretje: die mag nullptr zijn, en iemand anders is eigenaar.
+
+4
+00:15.971 --> 00:19.971
+Een unique_ptr is zelf eigenaar, en ruimt het object op.
+
+5
+00:19.971 --> 00:28.686
+Vuistregel: verplicht is een referentie, optioneel een pointer, eigenaar een unique_ptr. Schrijf nooit zelf new of delete.

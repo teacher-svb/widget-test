@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "De declaratie in de header"
+  },
+  "chapter": {
+    "nl": "Header en source"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "GripperComponent.h",
+  "typing": {
+    "fromCue": 2
+  },
+  "files": {
+    "code": "GripperComponent.h"
+  }
+}

@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.829
+Elke frame lees je eerst de input.
+
+2
+00:02.829 --> 00:09.686
+Dan update je alles. GetFrameTime geeft de seconden sinds de vorige frame, zoals delta in Godot.
+
+3
+00:09.686 --> 00:15.329
+Daarna teken je alles opnieuw. raylib is immediate mode: er is geen scene tree.
+
+4
+00:15.329 --> 00:22.900
+De input zit in main, niet in Cell. Zo kan een test op start drukken zonder toetsenbord en zonder venster.

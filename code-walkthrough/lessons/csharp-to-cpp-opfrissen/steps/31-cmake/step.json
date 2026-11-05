@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "CMakeLists.txt"
+  },
+  "chapter": {
+    "nl": "CMake en de linker"
+  },
+  "transition": "fade",
+  "mode": "text/x-cmake",
+  "languageLabel": "src/CMakeLists.txt",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "CMakeLists.txt"
+  }
+}

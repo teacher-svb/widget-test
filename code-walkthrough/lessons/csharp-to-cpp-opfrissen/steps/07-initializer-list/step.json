@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "De initializer list"
+  },
+  "chapter": {
+    "nl": "Constructors en const"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "GripperComponent.cpp",
+  "typing": {
+    "fromCue": 2
+  },
+  "files": {
+    "code": "GripperComponent.cpp"
+  }
+}

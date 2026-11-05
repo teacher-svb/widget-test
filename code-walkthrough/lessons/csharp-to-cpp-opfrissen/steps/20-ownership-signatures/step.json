@@ -1,0 +1,13 @@
+{
+  "title": {
+    "nl": "Wie wordt eigenaar?"
+  },
+  "chapter": {
+    "nl": "Eigenaarschap met unique_ptr"
+  },
+  "transition": "fade",
+  "languageLabel": "C++",
+  "typing": {
+    "fromCue": 1
+  }
+}

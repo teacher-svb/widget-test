@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:05.686
+In C# maak je objecten met new, en de garbage collector ruimt ze later op.
+
+2
+00:05.686 --> 00:10.186
+Na de toewijzing wijzen state en pending naar hetzelfde object.

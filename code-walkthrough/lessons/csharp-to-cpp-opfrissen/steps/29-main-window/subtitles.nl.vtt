@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:02.900
+Een raylib-programma start in main.
+
+2
+00:02.900 --> 00:07.900
+Je opent een venster, en dan loopt de game loop tot het venster sluit.
+
+3
+00:07.900 --> 00:11.971
+Cell cell maakt de hele robotcel, als waarde, zonder new.

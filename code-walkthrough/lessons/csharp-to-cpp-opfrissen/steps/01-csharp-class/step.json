@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "Een klasse in C#"
+  },
+  "chapter": {
+    "nl": "Header en source"
+  },
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "GripperComponent.cs",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "GripperComponent.cs"
+  }
+}

@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.614
+De parameters van een functie vertellen wie eigenaar wordt.
+
+2
+00:04.614 --> 00:09.614
+Een unique_ptr als parameter: de functie neemt het eigenaarschap over.
+
+3
+00:09.614 --> 00:14.543
+Een referentie: de functie gebruikt het object, en het bestaat zeker.
+
+4
+00:14.543 --> 00:19.829
+Een pointer: de functie gebruikt het misschien, want het kan nullptr zijn.

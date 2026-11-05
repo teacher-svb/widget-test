@@ -1,11 +1,12 @@
-name: code-walkthrough
+# Unique across all of GitBook ("code-walkthrough" is taken).
+name: apwt-code-walkthrough
 title: Code Walkthrough
 description: Embed narrated code walkthrough lessons (typing editor, subtitles, live preview) in GitBook pages.
 script: ./src/index.tsx
 # icon: ./assets/icon.png
 scopes: []
-# Set to your GitBook organization's ID or subdomain before publishing.
-organization: YOUR-ORGANIZATION
+# GitBook organization ID or subdomain (the "apwt" in apwt.gitbook.io).
+organization: apwt
 # private: only your organization can install it. "unlisted" and "public" also exist.
 visibility: private
 
@@ -23,8 +24,7 @@ blocks:
   - id: walkthrough
     title: Code walkthrough
     description: A narrated code lesson with a typing editor and live preview.
-    # Pasting a link that matches one of these turns it into the block.
-    # Replace with the address where the player is hosted.
+    # Pasting a link that matches turns it into the block:
+    # .../embed.html?lesson=<id>&lang=<lang> or .../index.html#<id>
     urlUnfurl:
-      - https://YOUR-HOST/code-walkthrough/embed.html
-      - https://YOUR-HOST/code-walkthrough/index.html
+      - https://teacher-svb.github.io/widget-test/code-walkthrough/**

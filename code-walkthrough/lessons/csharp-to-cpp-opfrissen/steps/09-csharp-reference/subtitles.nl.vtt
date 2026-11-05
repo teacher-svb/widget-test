@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:03.186
+In C# is een klasse een referentietype.
+
+2
+00:03.186 --> 00:09.686
+[[b = a|b is a]] maakt een tweede referentie naar hetzelfde object. Pas je b aan, dan verandert a mee.

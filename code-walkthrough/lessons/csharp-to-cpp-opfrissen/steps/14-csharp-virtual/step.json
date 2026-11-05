@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "virtual en override in C#"
+  },
+  "chapter": {
+    "nl": "Overerving en virtual"
+  },
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "C#",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "code.cs"
+  }
+}

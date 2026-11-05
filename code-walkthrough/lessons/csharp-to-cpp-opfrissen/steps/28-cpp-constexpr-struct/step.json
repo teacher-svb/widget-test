@@ -1,0 +1,14 @@
+{
+  "title": {
+    "nl": "constexpr, anonieme namespace en struct"
+  },
+  "chapter": {
+    "nl": "Constanten en struct"
+  },
+  "transition": "morph",
+  "mode": "text/x-c++src",
+  "languageLabel": "C++",
+  "typing": {
+    "fromCue": 1
+  }
+}

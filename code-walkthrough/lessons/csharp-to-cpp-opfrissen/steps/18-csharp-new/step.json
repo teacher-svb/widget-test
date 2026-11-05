@@ -1,0 +1,17 @@
+{
+  "title": {
+    "nl": "new en de garbage collector"
+  },
+  "chapter": {
+    "nl": "Eigenaarschap met unique_ptr"
+  },
+  "transition": "fade",
+  "mode": "text/x-csharp",
+  "languageLabel": "C#",
+  "typing": {
+    "fromCue": 1
+  },
+  "files": {
+    "code": "code.cs"
+  }
+}

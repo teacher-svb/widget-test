@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00.400 --> 00:04.686
+constexpr is een constante die gekend is bij het compileren.
+
+2
+00:04.686 --> 00:15.043
+Een namespace zonder naam maakt alles erin enkel zichtbaar in dit cpp-bestand. Zo botsen twee hulpfuncties met dezelfde naam niet bij het linken.
+
+3
+00:15.043 --> 00:20.186
+Een struct is in C++ gewoon een klasse waarin alles standaard public is.
+
+4
+00:20.186 --> 00:27.114
+In C++ zijn struct en class allebei waardetypes. De demo gebruikt struct voor data zonder gedrag.

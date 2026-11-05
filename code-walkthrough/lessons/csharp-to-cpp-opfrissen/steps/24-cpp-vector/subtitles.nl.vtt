@@ -1,0 +1,13 @@
+WEBVTT
+
+1
+00:00.400 --> 00:07.471
+In C++ is dat een std::vector. Hier een vector van pointers: de listeners horen niet bij de sensor.
+
+2
+00:07.471 --> 00:12.686
+push_back voegt toe, en std::erase verwijdert elk element met die waarde.
+
+3
+00:12.686 --> 00:21.257
+Let op: push_back kan de vector verplaatsen in het geheugen. Pointers naar elementen van de vector zijn daarna ongeldig.

@@ -1,0 +1,9 @@
+WEBVTT
+
+1
+00:00.400 --> 00:05.043
+Een generieke methode in C#: zoek de eerste component van type T.
+
+2
+00:05.043 --> 00:08.829
+as geeft het object als T, of null als het geen T is.

@@ -1,0 +1,13 @@
+{
+  "title": {
+    "nl": "Vier manieren om een object vast te houden"
+  },
+  "chapter": {
+    "nl": "Waarde, referentie, pointer"
+  },
+  "languageLabel": "C++",
+  "typing": {
+    "fromCue": 1,
+    "toCue": 4
+  }
+}

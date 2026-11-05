@@ -15,6 +15,11 @@
     "summary": "Scripts linken, variabelen, naamgeving, data types, operatoren, commentaar en strings: C#-code morpht naar JavaScript."
   },
   {
+    "id": "csharp-to-cpp-opfrissen",
+    "title": "Van C# naar C++: opfrissing",
+    "summary": "Header en source, waarde, referentie en pointer, virtual, unique_ptr, templates, raylib, CMake en Catch2: C#-code morpht naar C++."
+  },
+  {
     "id": "js-arrays",
     "title": "JavaScript: arrays and loops",
     "summary": "Arrays, for...of and the console, with live console output."

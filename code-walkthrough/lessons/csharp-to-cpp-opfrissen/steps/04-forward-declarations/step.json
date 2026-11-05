@@ -1,0 +1,16 @@
+{
+  "title": {
+    "nl": "Forward declarations"
+  },
+  "chapter": {
+    "nl": "Header en source"
+  },
+  "languageLabel": "GripperComponent.h",
+  "typing": {
+    "fromCue": 2,
+    "toCue": 2
+  },
+  "files": {
+    "code": "GripperComponent.h"
+  }
+}
